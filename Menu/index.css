@@ -43,15 +43,39 @@ body {
   position: relative;
   left: 5vw;
   top: 50%;
-  height: 9vh;
+  height: 6rem;
 }
 
 #title {
   position: absolute;
   color: white;
-  font-size: 3vh;
+  font-size: 2.5rem;
   left: 50%;
   top: 50%;
   text-align: center;
   transform: translate(-50%, -50%);
+}
+
+#cart {
+  position: absolute;
+  top: 50%;
+  transform: translate(0, -50%);
+  right: 5vw;
+  height: 3rem;
+  filter: invert(100%);
+  padding: 0.5rem;
+  border-radius: 0.25rem;
+  background-color: #d758ba;
+}
+
+#cart:hover {
+  cursor: pointer;
+}
+
+#menuTitle {
+  position: relative;
+  font-size: 3rem;
+  left: 50%;
+  transform: translateX(-50%);
+  text-align: center;
 }
