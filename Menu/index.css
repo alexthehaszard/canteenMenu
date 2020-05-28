@@ -70,10 +70,6 @@ body {
   filter: invert(100%);
 }
 
-#cartCard:hover {
-  cursor: pointer;
-}
-
 #cartCard {
   position: absolute;
   display: flex;
@@ -81,8 +77,6 @@ body {
   transform: translate(0, -50%);
   right: 5vw;
   padding: 0.5rem;
-  border-radius: 0.25rem;
-  background-color: #28a745;
 }
 
 #cartNumber {
