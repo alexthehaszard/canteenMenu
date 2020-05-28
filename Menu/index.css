@@ -1,5 +1,57 @@
-.defaultText {
-  font-family: Arial, Helvetica, sans-serif;
-  font-weight: bold;
+.itemName {
   text-align: center;
+  top: 50%;
+}
+
+.priceText {
+  text-align: center;
+}
+
+.menuCards {
+  display: block;
+  width: 80%;
+  margin-left: 10%;
+  margin-top: 5%;
+  position: relative;
+}
+
+.addToCart {
+  display: inline-block;
+  margin-left: 50%;
+  margin-bottom: 1vh;
+  transform: translateX(-50%);
+  width: auto;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+}
+
+#menuItems {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(350px, 0.4fr));
+}
+
+#navBar {
+  position: sticky;
+  background-color: #005239;
+  padding: 2vh;
+}
+
+#logo {
+  position: relative;
+  left: 5vw;
+  top: 50%;
+  height: 9vh;
+}
+
+#title {
+  position: absolute;
+  color: white;
+  font-size: 3vh;
+  left: 50%;
+  top: 50%;
+  text-align: center;
+  transform: translate(-50%, -50%);
 }
