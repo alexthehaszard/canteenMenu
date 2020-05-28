@@ -15,6 +15,15 @@
   position: relative;
 }
 
+.lunchCards {
+  position: relative;
+  display: block;
+  max-width: 600px;
+  min-width: 300px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
 .addToCart {
   display: inline-block;
   margin-left: 50%;
@@ -57,19 +66,32 @@ body {
 }
 
 #cart {
+  height: 3rem;
+  filter: invert(100%);
+}
+
+#cartCard:hover {
+  cursor: pointer;
+}
+
+#cartCard {
   position: absolute;
+  display: flex;
   top: 50%;
   transform: translate(0, -50%);
   right: 5vw;
-  height: 3rem;
-  filter: invert(100%);
   padding: 0.5rem;
   border-radius: 0.25rem;
-  background-color: #d758ba;
+  background-color: #28a745;
 }
 
-#cart:hover {
-  cursor: pointer;
+#cartNumber {
+  position: relative;
+  font-size: 1rem;
+  margin-left: 1rem;
+  margin-top: auto;
+  margin-bottom: auto;
+  color: white;
 }
 
 #menuTitle {

@@ -1,11 +1,12 @@
+let cartItems = [];
 let menuCards = [];
 let menuNames = [];
 let menuPrices = [];
 let menuButtons = [];
 let menuDiv = document.getElementById("menuItems");
-let week = 1;
+let week = 2;
 let time = "morning";
-let day = 0;
+let day = 3;
 let menuItems;
 let menuTitle = document.createElement("p");
 menuTitle.id = "menuTitle";
@@ -33,6 +34,10 @@ if (time == "morning") {
     menuButtons[i] = document.createElement("button");
     menuButtons[i].innerHTML = "Add to Cart";
     menuButtons[i].classList = "btn btn-success addToCart";
+    menuButtons[i].setAttribute(
+      "onclick",
+      "addItemToCart(menuItems[" + i + "])"
+    );
     menuCards[i].appendChild(menuButtons[i]);
   }
 } else {
@@ -44,8 +49,10 @@ if (time == "morning") {
     menuItems = Object.values(menu.content.lunch.week2);
   }
 
+  document.getElementById("menuItems").style = "display: inherit";
+
   menuCards[0] = document.createElement("div");
-  menuCards[0].classList = "card border-success mb-3 menuCards";
+  menuCards[0].classList = "card border-success mb-3 lunchCards";
   menuDiv.appendChild(menuCards[0]);
 
   menuNames[0] = document.createElement("p");
@@ -61,5 +68,27 @@ if (time == "morning") {
   menuButtons[0] = document.createElement("button");
   menuButtons[0].innerHTML = "Add to Cart";
   menuButtons[0].classList = "btn btn-success addToCart";
+  menuButtons[0].setAttribute(
+    "onclick",
+    "addItemToCart(menuItems[" + day + "])"
+  );
   menuCards[0].appendChild(menuButtons[0]);
+}
+
+function addItemToCart(item) {
+  if (
+    (document.getElementById("cartNumber").innerHTML < 3 &&
+      time == "morning") ||
+    (document.getElementById("cartNumber").innerHTML < 1 && time == "lunch")
+  ) {
+    cartItems.push(item);
+    document.getElementById("cartNumber").innerHTML++;
+    console.log(cartItems);
+  } else {
+    if (time == "morning") {
+      alert("You can have a maximum of 3 items at morning tea.");
+    } else {
+      alert("You can only have 1 lunch item.");
+    }
+  }
 }
