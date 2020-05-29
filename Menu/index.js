@@ -1,3 +1,5 @@
+let screen = 0;
+
 let cartItems = [];
 let menuCards = [];
 let menuNames = [];
@@ -10,6 +12,7 @@ let day = 3;
 let menuItems;
 let menuTitle = document.createElement("p");
 menuTitle.id = "menuTitle";
+menuTitle.classList = "headers";
 document.getElementById("header").appendChild(menuTitle);
 
 if (time == "morning") {
@@ -90,5 +93,15 @@ function addItemToCart(item) {
     } else {
       alert("You can only have 1 lunch item.");
     }
+  }
+}
+
+function goToCart() {
+  if (screen == 0) {
+    document.getElementById("content").style = "transform: translateX(-100%)";
+    screen = 1;
+  } else {
+    document.getElementById("content").style = "transform: translateX(0)";
+    screen = 0;
   }
 }
