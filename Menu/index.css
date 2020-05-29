@@ -41,6 +41,13 @@
   text-align: center;
 }
 
+.listPrice {
+  position: absolute;
+  right: 5%;
+  top: 50%;
+  transform: translateY(-50%);
+}
+
 html,
 body {
   overflow-x: hidden;
@@ -56,7 +63,7 @@ body {
 #content {
   display: grid;
   grid-template-columns: 100% 100%;
-  transition: transform 1s ease;
+  transition: transform 1s ease-in-out;
 }
 
 #menuItems {
@@ -127,4 +134,10 @@ body {
 #checkoutHeader {
   transform: translate(-50%, -0%);
   z-index: -1;
+}
+
+#checkoutItems {
+  margin-top: 10vh;
+  width: 80%;
+  margin-left: 10%;
 }
