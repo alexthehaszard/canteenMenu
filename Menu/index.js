@@ -1,4 +1,4 @@
-//what screen is being showed, the menu or the cart.
+//what screen is being showed, the menu or the checkout.
 let screen = 0;
 
 //the cart items, their name elements and their price elements. all in arrays.

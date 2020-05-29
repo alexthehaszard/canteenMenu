@@ -18,8 +18,8 @@
 .lunchCards {
   position: relative;
   display: block;
+  width: 80%;
   max-width: 600px;
-  min-width: 300px;
   margin-left: auto;
   margin-right: auto;
 }
@@ -30,6 +30,9 @@
   margin-bottom: 1vh;
   transform: translateX(-50%);
   width: auto;
+  color: #005239;
+  background-color: #fdb929;
+  border-color: goldenrod;
 }
 
 .headers {
@@ -39,6 +42,10 @@
   margin-top: 5px;
   transform: translateX(-50%);
   text-align: center;
+}
+
+.checkoutItem {
+ padding-right: 15%;
 }
 
 .listPrice {
@@ -63,7 +70,7 @@ body {
 #content {
   display: grid;
   grid-template-columns: 100% 100%;
-  transition: transform 1s ease-in-out;
+  transition: transform 0.5s ease-in-out;
 }
 
 #menuItems {
