@@ -34,16 +34,23 @@
 
 .headers {
   position: relative;
-  font-size: 3rem;
+  font-size: min(5vw, 2.5rem);
   left: 50%;
+  margin-top: 5px;
   transform: translateX(-50%);
   text-align: center;
 }
 
+html,
 body {
+  overflow-x: hidden;
+}
+
+body {
+  position: relative;
   margin: 0;
   padding: 0;
-  overflow-x: hidden;
+  max-width: 100%;
 }
 
 #content {
@@ -58,26 +65,28 @@ body {
 
 #menuItems {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(350px, 0.4fr));
+  grid-template-columns: repeat(auto-fit, minmax(320px, 0.5fr));
+  align-items: center;
 }
 
 #navBar {
   position: sticky;
   background-color: #005239;
   padding: 2vh;
+  width: 100%;
 }
 
 #logo {
   position: relative;
   left: 5vw;
   top: 50%;
-  height: 6rem;
+  height: min(10vw, 6rem);
 }
 
 #title {
   position: absolute;
   color: white;
-  font-size: 2.5rem;
+  font-size: min(5vw, 2.5rem);
   left: 50%;
   top: 50%;
   text-align: center;
@@ -85,7 +94,7 @@ body {
 }
 
 #cart {
-  height: 3rem;
+  height: max(min(5vw, 3rem), 1rem);
   filter: invert(100%);
 }
 
@@ -100,9 +109,27 @@ body {
 
 #cartNumber {
   position: relative;
-  font-size: 1rem;
-  margin-left: 1rem;
+  font-size: min(4vw, 1rem);
+  margin-left: min(3vw, 1rem);
   margin-top: auto;
   margin-bottom: auto;
   color: white;
+}
+
+#arrow {
+  padding: 0;
+  margin: 0;
+  width: 4rem;
+}
+
+#backArrow {
+  position: relative;
+  margin-left: 2vw;
+  margin-top: 2rem;
+  font-size: 2rem;
+}
+
+#checkoutHeader {
+  transform: translate(-50%, -200%);
+  z-index: -1;
 }

@@ -8,7 +8,7 @@ let menuButtons = [];
 let menuDiv = document.getElementById("menuItems");
 let week = 2;
 let time = "morning";
-let day = 3;
+let day = 4;
 let menuItems;
 let menuTitle = document.createElement("p");
 menuTitle.id = "menuTitle";
