@@ -29,6 +29,9 @@ menuTitle.id = "menuTitle";
 menuTitle.classList = "headers";
 document.getElementById("header").appendChild(menuTitle);
 
+//the total price
+let totalPrice = 0;
+
 //this displays all of the menu elements including their cards, titles, prices and buttons.
 if (time == "morning") {
   //if the time is morning, show the morning menu and title.
@@ -103,6 +106,7 @@ function addItemToCart(item) {
   if ((document.getElementById("cartNumber").innerHTML < 3 &&  time == "morning") || (document.getElementById("cartNumber").innerHTML < 1 && time == "lunch")) {
     //show the card for the cart
     document.getElementById("checkoutItems").style = "display: flex";
+    document.getElementById("total").style = "display: initial";
     
     //add the current item to the cart
     cartItems.push(item);
@@ -121,7 +125,10 @@ function addItemToCart(item) {
     cartPricesToShow[cartPricesToShow.length - 1].classList = "listPrice";
     cartPricesToShow[cartPricesToShow.length - 1].innerHTML = "$" + cartItems[cartItems.length - 1].price;
     cartItemsToShow[cartItemsToShow.length - 1].appendChild(cartPricesToShow[cartPricesToShow.length - 1]);
+    totalPrice += parseFloat(cartItems[cartItems.length - 1].price);
 
+    //make the total price update
+    document.getElementById("totalPrice").innerHTML = "Total: $" + totalPrice;
   } else {
 
     //make sure there is not too many items going in the cart.
