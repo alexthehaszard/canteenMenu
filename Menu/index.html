@@ -35,15 +35,16 @@
           <ul id="checkoutList" class="list-group list-group-flush"></ul>
         </div>
         <div id="total" class="card" style="display: none">
-          <p id="totalPrice" class="inlineStyling"></p>
-          <button id="buyButton" class="btn btn-success" onclick="toggleCredentialScreen()">Buy</button>
+          <p id="totalPrice"></p>
+          <button id="buyButton" class="btn btn-success" onclick="toggleCredentialScreen()">Checkout</button>
         </div>
         <div id="credentials" style="display: none;">
           <div id="inputCredentials" class="card border-secondary mb-3">
-            <input placeholder="Full Name" id="inputName"></input>
-            <input placeholder="Tutor Group" id="inputTutorGroup" class="inputs"></input>
-            <input placeholder="Student ID" id="inputStudentID" class="inputs"></input>
-            <button id="buyButton" class="btn btn-success inputs">Place Order</button>
+            <button id="closeCredentials" class="btn btn-danger" onclick="toggleCredentialScreen()">X</button>
+            <input placeholder="Full Name" id="inputName" class="inputs" type="text"></input>
+            <input placeholder="Tutor Group" id="inputTutorGroup" class="inputs mgt5" type="text"></input>
+            <input placeholder="Student ID" id="inputStudentID" class="inputs mgt5" type="number"></input>
+            <button id="buyButton" class="btn btn-success mgt10">Place Order</button>
           </div>
         </div>
       </div>

@@ -59,8 +59,26 @@
   display: inline-block;
 }
 
-.inputs {
+.mgt5 {
   margin-top: 5%;
+}
+
+.mgt10 {
+  margin-top: 10%;
+}
+
+.inputs {
+  border-width: 0;
+  border-radius: 0;
+  border-bottom-width: 2px;
+  border-color: #005239;
+  transition: border-color 0.5s ease;
+  transform-origin: left;
+}
+
+.inputs:focus {
+  outline: none;
+  border-color: #fdb929;
 }
 
 html,
@@ -163,9 +181,10 @@ body {
   position: absolute;
   left: 150%;
   transform: translateX(-50%);
-  width: max-content;
-  padding: 1%;
-  font-size: min(5vw, 2.5rem);
+  width: min(80vw, 320px);
+  padding: 2vh;
+  font-size: min(10vw, 2.5rem);
+  text-align: center;
 }
 
 #totalPrice {
@@ -176,15 +195,29 @@ body {
   position: fixed;
   background-color: rgba(0, 0, 0, 0.5);
   width: 200%;
-  height: 100vh;
+  height: max(86.5vh, 100%);
   top: 0;
 }
 
 #inputCredentials {
   position: fixed;
   top: 3%;
-  padding: 7vh;
+  padding: 5vh;
   left: 150%;
   transform: translateX(-50%);
   width: min(80vw, 320px);
+}
+
+#closeCredentials {
+  font-size: min(3vw, 12px);
+  position: absolute;
+  width: max-content;
+  top: 5px;
+  right: 5px;
+}
+
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
 }
