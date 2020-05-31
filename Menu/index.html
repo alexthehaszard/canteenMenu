@@ -1,19 +1,20 @@
 <!DOCTYPE html>
-<html>
+<html id="html">
   <head>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous"/>
     <link rel="stylesheet" href="index.css" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <script src="menu.js"></script>
+    <title>Bayfield Canteen Menu</title>
   </head>
 
-  <body>
+  <body id="body">
 
     <!-- set up the navigation bar -->
     <nav id="navBar">
       <img id="logo" src="https://upload.wikimedia.org/wikipedia/en/7/73/Bayfield_High_School_Crest.png"/>
       <p id="title" class="">Bayfield High School Canteen</p>
-      <div id="cartCard" class="btn btn-success" onclick="goToCart()">
+      <div id="cartCard" class="btn btn-success buttonColour" onclick="goToCart()">
         <img id="cart" src="images/cart-line.png" />
         <p id="cartNumber">0</p>
       </div>
@@ -27,7 +28,7 @@
       </div>
       <!-- this is for the second screen, the checkout/cart -->
       <div id="checkout">
-        <div id="backArrow" class="btn btn-success" onclick="goToCart()">
+        <div id="backArrow" class="btn btn-success buttonColour" onclick="goToCart()">
           <p id="arrow">🠐</p>
         </div>
         <p id="checkoutHeader" class="headers">Cart</p>
@@ -36,7 +37,7 @@
         </div>
         <div id="total" class="card" style="display: none">
           <p id="totalPrice"></p>
-          <button id="buyButton" class="btn btn-success" onclick="toggleCredentialScreen()">Checkout</button>
+          <button id="buyButton" class="btn btn-success buttonColour" onclick="toggleCredentialScreen()">Checkout</button>
         </div>
         <div id="credentials" style="display: none;">
           <div id="inputCredentials" class="card border-secondary mb-3">
@@ -44,7 +45,7 @@
             <input placeholder="Full Name" id="inputName" class="inputs" type="text"></input>
             <input placeholder="Tutor Group" id="inputTutorGroup" class="inputs mgt5" type="text"></input>
             <input placeholder="Student ID" id="inputStudentID" class="inputs mgt5" type="number"></input>
-            <button id="buyButton" class="btn btn-success mgt10">Place Order</button>
+            <button id="buyButton" class="btn btn-success mgt10 buttonColour">Place Order</button>
           </div>
         </div>
       </div>

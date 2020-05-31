@@ -60,7 +60,7 @@ if (time == "morning") {
     //this creates the buttons
     menuButtons[i] = document.createElement("button");
     menuButtons[i].innerHTML = "Add to Cart";
-    menuButtons[i].classList = "btn btn-success addToCart";
+    menuButtons[i].classList = "btn btn-success addToCart buttonColour";
     menuButtons[i].setAttribute("onclick", "addItemToCart(menuItems[" + i + "])");
     menuCards[i].appendChild(menuButtons[i]);
   }
@@ -96,7 +96,7 @@ if (time == "morning") {
   //creates the add to cart button for the lunch item
   menuButtons[0] = document.createElement("button");
   menuButtons[0].innerHTML = "Add to Cart";
-  menuButtons[0].classList = "btn btn-success addToCart";
+  menuButtons[0].classList = "btn btn-success addToCart buttonColour";
   menuButtons[0].setAttribute("onclick", "addItemToCart(menuItems[" + day + "])");
   menuCards[0].appendChild(menuButtons[0]);
 }
@@ -144,10 +144,12 @@ function goToCart() {
   if (screen == 0) {
     //move to the cart screen
     document.getElementById("content").style = "transform: translateX(-100%)";
+    document.getElementById("html").style = "overflow-y: hidden";
     screen = 1;
   } else {
     //move to the menu screen
     document.getElementById("content").style = "transform: translateX(0)";
+    document.getElementById("html").style = "overflow-y: initial";
     screen = 0;
   }
 }

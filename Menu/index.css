@@ -30,6 +30,9 @@
   margin-bottom: 1vh;
   transform: translateX(-50%);
   width: auto;
+}
+
+.buttonColour {
   color: #005239;
   background-color: #fdb929;
   border-color: goldenrod;
