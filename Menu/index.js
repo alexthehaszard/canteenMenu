@@ -151,3 +151,13 @@ function goToCart() {
     screen = 0;
   }
 }
+
+function toggleCredentialScreen() {
+  if (screen != 2) {
+    document.getElementById("credentials").style = "display: inherit";
+    screen = 2;
+  } else {
+    document.getElementById("credentials").style = "display: none";
+    screen = 1;
+  }
+}

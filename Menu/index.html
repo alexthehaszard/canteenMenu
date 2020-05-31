@@ -36,7 +36,15 @@
         </div>
         <div id="total" class="card" style="display: none">
           <p id="totalPrice" class="inlineStyling"></p>
-          <button id="buyButton" class="btn btn-success">Buy</button>
+          <button id="buyButton" class="btn btn-success" onclick="toggleCredentialScreen()">Buy</button>
+        </div>
+        <div id="credentials" style="display: none;">
+          <div id="inputCredentials" class="card border-secondary mb-3">
+            <input placeholder="Full Name" id="inputName"></input>
+            <input placeholder="Tutor Group" id="inputTutorGroup" class="inputs"></input>
+            <input placeholder="Student ID" id="inputStudentID" class="inputs"></input>
+            <button id="buyButton" class="btn btn-success inputs">Place Order</button>
+          </div>
         </div>
       </div>
     </div>
