@@ -13,7 +13,7 @@ let menu = {
       },
 
       muffins: {
-        name: "Muffins - Savoury or Sweet",
+        name: "Muffins",
         price: "3",
       },
 

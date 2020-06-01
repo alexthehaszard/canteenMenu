@@ -51,9 +51,19 @@
  padding-right: 15%;
 }
 
+.removeItem {
+  position: absolute;
+  font-size: 0.5rem;
+  width: max-content;
+  right: 5px;
+  top: 50%;
+  transform: translateY(-50%);
+  text-align: center;
+}
+
 .listPrice {
   position: absolute;
-  right: 5%;
+  right: 3rem;
   top: 50%;
   transform: translateY(-50%);
 }
@@ -75,7 +85,7 @@
   border-radius: 0;
   border-bottom-width: 2px;
   border-color: #005239;
-  transition: border-color 0.5s ease;
+  transition: border-color 0.25s ease;
   transform-origin: left;
 }
 

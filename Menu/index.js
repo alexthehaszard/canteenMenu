@@ -5,6 +5,7 @@ let screen = 0;
 let cartItems = [];
 let cartItemsToShow = [];
 let cartPricesToShow = [];
+let cartItemsRemoveButtons = [];
 
 //all of the elements needed to make the cards for the menu, all in arrays.
 let menuCards = [];
@@ -116,8 +117,8 @@ function addItemToCart(item) {
 
     //add a list element, give it classes, put it inside the ul element and display the items name
     cartItemsToShow.push(document.createElement("li"));
-    cartItemsToShow[cartItemsToShow.length - 1].classList ="list-group-item checkoutItem";
-    cartItemsToShow[cartItemsToShow.length - 1].innerHTML =cartItems[cartItems.length - 1].name;
+    cartItemsToShow[cartItemsToShow.length - 1].classList = "list-group-item checkoutItem";
+    cartItemsToShow[cartItemsToShow.length - 1].innerHTML = cartItems[cartItems.length - 1].name;
     document.getElementById("checkoutList").appendChild(cartItemsToShow[cartItemsToShow.length - 1]);
 
     //add a p element, give it classes, put it inside of li element and display the price.
@@ -126,6 +127,14 @@ function addItemToCart(item) {
     cartPricesToShow[cartPricesToShow.length - 1].innerHTML = "$" + cartItems[cartItems.length - 1].price;
     cartItemsToShow[cartItemsToShow.length - 1].appendChild(cartPricesToShow[cartPricesToShow.length - 1]);
     totalPrice += parseFloat(cartItems[cartItems.length - 1].price);
+
+    //adds the remove item button
+    cartItemsRemoveButtons.push(document.createElement("button"));
+    cartItemsRemoveButtons[cartItemsRemoveButtons.length - 1].classList = "btn btn-danger removeItem";
+    cartItemsRemoveButtons[cartItemsRemoveButtons.length - 1].innerHTML = "X";
+    cartItemsRemoveButtons[cartItemsRemoveButtons.length - 1].setAttribute("onclick", "removeItem(" + (cartItemsRemoveButtons.length - 1) + ")")
+    cartItemsToShow[cartItemsToShow.length - 1].appendChild(cartItemsRemoveButtons[cartItemsRemoveButtons.length - 1]);
+
 
     //make the total price update
     document.getElementById("totalPrice").innerHTML = "Total: $" + totalPrice;
@@ -161,5 +170,34 @@ function toggleCredentialScreen() {
   } else {
     document.getElementById("credentials").style = "display: none";
     screen = 1;
+  }
+}
+
+function removeItem(index) {
+  //remove the card of the item being removed
+  cartItemsToShow[index].parentNode.removeChild(cartItemsToShow[index]);
+
+  //update the total price
+  totalPrice -= cartItems[index].price;
+  document.getElementById("totalPrice").innerHTML = "Total: $" + totalPrice;
+
+  //remove the item from all arrays
+  cartItems.splice(index, 1);
+  cartItemsToShow.splice(index, 1);
+  cartPricesToShow.splice(index, 1);
+  cartItemsRemoveButtons.splice(index, 1);
+
+  //remove the item from the counter by the cart icon
+  document.getElementById("cartNumber").innerHTML--;
+
+  //make all of the other remove button onclick events update, as the old values won't work anymore
+  for (let i = 0; i < cartItemsRemoveButtons.length; i++) {
+    cartItemsRemoveButtons[i].setAttribute("onclick", "removeItem(" + i + ")");
+  }
+
+  //if there are no items in the cart, hide the total and the items cards
+  if (cartItems.length < 1) {
+    document.getElementById("total").style = "display: none";
+    document.getElementById("checkoutItems").style = "display: none";
   }
 }
