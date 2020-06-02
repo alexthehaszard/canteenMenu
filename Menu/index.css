@@ -48,22 +48,40 @@
 }
 
 .checkoutItem {
- padding-right: 15%;
+ padding-right: 30%;
 }
 
-.removeItem {
+.addItem {
   position: absolute;
   font-size: 0.5rem;
-  width: max-content;
+  padding: 5px;
   right: 5px;
   top: 50%;
   transform: translateY(-50%);
   text-align: center;
 }
 
+.removeItem {
+  position: absolute;
+  font-size: 0.5rem;
+  padding: 5px;
+  right: 40px;
+  top: 50%;
+  transform: translateY(-50%);
+  text-align: center;
+}
+
+.itemCount {
+  position: absolute;
+  font-size: 1rem;
+  right: 1.7rem;
+  top: 50%;
+  transform: translateY(-50%);
+}
+
 .listPrice {
   position: absolute;
-  right: 3rem;
+  right: 4rem;
   top: 50%;
   transform: translateY(-50%);
 }

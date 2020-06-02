@@ -6,6 +6,8 @@ let cartItems = [];
 let cartItemsToShow = [];
 let cartPricesToShow = [];
 let cartItemsRemoveButtons = [];
+let cartItemsAddButtons = [];
+let cartAmounts = [];
 
 //all of the elements needed to make the cards for the menu, all in arrays.
 let menuCards = [];
@@ -130,12 +132,24 @@ function addItemToCart(item) {
 
     //adds the remove item button
     cartItemsRemoveButtons.push(document.createElement("button"));
-    cartItemsRemoveButtons[cartItemsRemoveButtons.length - 1].classList = "btn btn-danger removeItem";
-    cartItemsRemoveButtons[cartItemsRemoveButtons.length - 1].innerHTML = "X";
+    cartItemsRemoveButtons[cartItemsRemoveButtons.length - 1].classList = "btn btn-warning removeItem";
+    cartItemsRemoveButtons[cartItemsRemoveButtons.length - 1].innerHTML = "-";
     cartItemsRemoveButtons[cartItemsRemoveButtons.length - 1].setAttribute("onclick", "removeItem(" + (cartItemsRemoveButtons.length - 1) + ")")
     cartItemsToShow[cartItemsToShow.length - 1].appendChild(cartItemsRemoveButtons[cartItemsRemoveButtons.length - 1]);
 
-
+    //add the add item button
+    cartItemsAddButtons.push(document.createElement("button"));
+    cartItemsAddButtons[cartItemsAddButtons.length - 1].classList = "btn btn-warning addItem";
+    cartItemsAddButtons[cartItemsAddButtons.length - 1].innerHTML = "+";
+    cartItemsAddButtons[cartItemsAddButtons.length - 1].setAttribute("onclick", "addItem(" + (cartItemsAddButtons.length - 1) + ")")
+    cartItemsToShow[cartItemsToShow.length - 1].appendChild(cartItemsAddButtons[cartItemsAddButtons.length - 1]);
+    
+    //add the total text
+    cartAmounts.push(document.createElement("p"));
+    cartAmounts[cartAmounts.length - 1].innerHTML = 1;
+    cartAmounts[cartAmounts.length - 1].classList = "itemCount";
+    cartItemsToShow[cartItemsToShow.length - 1].appendChild(cartAmounts[cartAmounts.length - 1]);
+      
     //make the total price update
     document.getElementById("totalPrice").innerHTML = "Total: $" + totalPrice;
   } else {
@@ -174,30 +188,66 @@ function toggleCredentialScreen() {
 }
 
 function removeItem(index) {
-  //remove the card of the item being removed
-  cartItemsToShow[index].parentNode.removeChild(cartItemsToShow[index]);
+  
+  //remove one from the item's total, if there is more than one
+  if (cartAmounts[index].innerHTML > 1) {
+    //re-enable the cart button, if it is disabled
+    cartItemsAddButtons[index].disabled = false; 
+    
+    //take away one from the total amount
+    cartAmounts[index].innerHTML--;
+    
+    //update the total price
+    totalPrice -= cartItems[index].price;
+    document.getElementById("totalPrice").innerHTML = "Total: $" + totalPrice;
+  }
+  //if there is only one, then remove the card.
+  else {
+    let cf = confirm("Are you sure you want to remove this item from the cart?")
+    if (cf) {
+      //update the total price
+      totalPrice -= cartItems[index].price;
+      document.getElementById("totalPrice").innerHTML = "Total: $" + totalPrice;
+      
+      //remove the card of the item being removed
+      cartItemsToShow[index].parentNode.removeChild(cartItemsToShow[index]);
 
+      //remove the item from all arrays
+      cartItems.splice(index, 1);
+      cartItemsToShow.splice(index, 1);
+      cartPricesToShow.splice(index, 1);
+      cartItemsRemoveButtons.splice(index, 1);
+      cartAmounts.splice(index, 1);
+      cartItemsAddButtons.splice(index, 1);
+
+      //remove the item from the counter by the cart icon
+      document.getElementById("cartNumber").innerHTML--;
+
+      //make all of the other remove button onclick events update, as the old values won't work anymore
+      for (let i = 0; i < cartItemsRemoveButtons.length; i++) {
+        cartItemsRemoveButtons[i].setAttribute("onclick", "removeItem(" + i + ")");
+        cartItemsAddButtons[i].setAttribute("onclick", "addItem(" + i + ")");
+      }
+
+      //if there are no items in the cart, hide the total and the items cards
+      if (cartItems.length < 1) {
+        document.getElementById("total").style = "display: none";
+        document.getElementById("checkoutItems").style = "display: none";
+      }
+    }
+  }
+}
+
+function addItem(index) {
+  //if there is 3, then disable the button
+  if (cartAmounts[index].innerHTML == 2) {
+    cartItemsAddButtons[index].disabled = true;
+  }
+  
+  //add one to the item's total
+  cartAmounts[index].innerHTML++;
+  
   //update the total price
-  totalPrice -= cartItems[index].price;
+  totalPrice += parseInt(cartItems[index].price);
   document.getElementById("totalPrice").innerHTML = "Total: $" + totalPrice;
-
-  //remove the item from all arrays
-  cartItems.splice(index, 1);
-  cartItemsToShow.splice(index, 1);
-  cartPricesToShow.splice(index, 1);
-  cartItemsRemoveButtons.splice(index, 1);
-
-  //remove the item from the counter by the cart icon
-  document.getElementById("cartNumber").innerHTML--;
-
-  //make all of the other remove button onclick events update, as the old values won't work anymore
-  for (let i = 0; i < cartItemsRemoveButtons.length; i++) {
-    cartItemsRemoveButtons[i].setAttribute("onclick", "removeItem(" + i + ")");
-  }
-
-  //if there are no items in the cart, hide the total and the items cards
-  if (cartItems.length < 1) {
-    document.getElementById("total").style = "display: none";
-    document.getElementById("checkoutItems").style = "display: none";
-  }
 }
