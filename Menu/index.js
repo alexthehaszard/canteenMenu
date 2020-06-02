@@ -19,9 +19,15 @@ let menuButtons = [];
 let menuDiv = document.getElementById("menuItems");
 
 //these are used to tell what should be on the menu
-let week = 2;
-let time = "morning";
-let day = 4;
+const today = new Date;
+let time;
+if (today.getHours() < 12) {
+    time = "morning";
+} else {
+    time = "lunch";
+}
+let week = 1;
+let day = 0;
 
 //what is on the current menu
 let menuItems;
@@ -105,8 +111,11 @@ if (time == "morning") {
 }
 
 function addItemToCart(item) {
-  //if there is less than 3 morning tea items or less than 1 lunch items
-  if ((document.getElementById("cartNumber").innerHTML < 3 &&  time == "morning") || (document.getElementById("cartNumber").innerHTML < 1 && time == "lunch")) {
+    if (cartItems.includes(item) == true) {
+        alert("Item is already in cart!");
+    }
+    //if there is less than 3 morning tea items or less than 1 lunch items
+    else if ((document.getElementById("cartNumber").innerHTML < 3 && time == "morning") || (document.getElementById("cartNumber").innerHTML < 1 && time == "lunch")) {
     //show the card for the cart
     document.getElementById("checkoutItems").style = "display: flex";
     document.getElementById("total").style = "display: initial";
