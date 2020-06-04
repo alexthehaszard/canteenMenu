@@ -104,6 +104,8 @@ function showMenu() {
 }
 
 function addItemToCart(item) {
+    let lunchContents1 = Object.values(menu.content.lunch.week1);
+    let lunchContents2 = Object.values(menu.content.lunch.week2);
     if (cartItems.includes(item) == true) {
         alert("Item is already in cart!");
     }
@@ -114,7 +116,7 @@ function addItemToCart(item) {
         morningTeaItems++;
     } else {
         lunchItems++;
-    }
+     }
 
     //show the card for the cart
     document.getElementById("checkoutItems").style = "display: flex";
@@ -151,7 +153,11 @@ function addItemToCart(item) {
     cartItemsAddButtons[cartItemsAddButtons.length - 1].classList = "btn btn-warning addItem";
     cartItemsAddButtons[cartItemsAddButtons.length - 1].innerHTML = "+";
     cartItemsAddButtons[cartItemsAddButtons.length - 1].setAttribute("onclick", "addItem(" + (cartItemsAddButtons.length - 1) + ")");
-    cartItemsToShow[cartItemsToShow.length - 1].appendChild(cartItemsAddButtons[cartItemsAddButtons.length - 1]);
+        cartItemsToShow[cartItemsToShow.length - 1].appendChild(cartItemsAddButtons[cartItemsAddButtons.length - 1]);
+
+        if (lunchContents1.includes(item) || lunchContents2.includes(item)) {
+            cartItemsAddButtons[cartItemsAddButtons.length - 1].disabled = true;
+        }
     
     //add the total text
     cartAmounts.push(document.createElement("p"));
