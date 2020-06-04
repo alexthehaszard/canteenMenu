@@ -5,6 +5,10 @@ let screen = 0;
 let morningTeaItems = 0;
 let lunchItems = 0;
 
+//arrays for the items in the lunch menu
+let lunchContents1 = Object.values(menu.content.lunch.week1);
+let lunchContents2 = Object.values(menu.content.lunch.week2);
+
 //the cart items, their name elements and their price elements. all in arrays.
 let cartItems = [];
 let cartItemsToShow = [];
@@ -36,92 +40,94 @@ showMenu();
 
 //this displays all of the menu elements including their cards, titles, prices and buttons.
 function showMenu() {
-		menuDiv.innerHTML = "";
-    if (time == "morning") {
-        menuItems = Object.values(menu.content.morningTea);
+  menuDiv.innerHTML = "";
+  if (time == "morning") {
+		//display the morning tea menu
+		//get the morning tea options from the object
+    menuItems = Object.values(menu.content.morningTea);
 
-        for (let i = 0; i < menuItems.length; i++) {
-            //add each item from the menu object into their cards and onto the screen
-            //this creates the cards
-            menuCards[i] = document.createElement("div");
-            menuCards[i].classList = "card border-success mb-3 menuCards";
-            menuDiv.appendChild(menuCards[i]);
+    for (let i = 0; i < menuItems.length; i++) {
+      //add each item from the menu object into their cards and onto the screen
+      //this creates the cards
+      menuCards[i] = document.createElement("div");
+      menuCards[i].classList = "card border-success mb-3 menuCards";
+      menuDiv.appendChild(menuCards[i]);
 
-            //this creates the names
-            menuNames[i] = document.createElement("p");
-            menuNames[i].innerHTML = menuItems[i].name;
-            menuNames[i].classList = "itemName card-header";
-            menuCards[i].appendChild(menuNames[i]);
+      //this creates the names
+      menuNames[i] = document.createElement("p");
+      menuNames[i].innerHTML = menuItems[i].name;
+      menuNames[i].classList = "itemName card-header";
+      menuCards[i].appendChild(menuNames[i]);
 
-            //this creates the prices
-            menuPrices[i] = document.createElement("p");
-            menuPrices[i].innerHTML = "Price: $" + menuItems[i].price;
-            menuPrices[i].classList = "priceText";
-            menuCards[i].appendChild(menuPrices[i]);
+      //this creates the prices
+      menuPrices[i] = document.createElement("p");
+      menuPrices[i].innerHTML = "Price: $" + menuItems[i].price;
+      menuPrices[i].classList = "priceText";
+      menuCards[i].appendChild(menuPrices[i]);
 
-            //this creates the buttons
-            menuButtons[i] = document.createElement("button");
-            menuButtons[i].innerHTML = "Add to Cart";
-            menuButtons[i].classList = "btn btn-success addToCart buttonColour";
-            menuButtons[i].setAttribute("onclick", "addItemToCart(menuItems[" + i + "])");
-            menuCards[i].appendChild(menuButtons[i]);
-        }
-    } else {
-        //display the lunch menu
-
-        //display the current week's lunch menu
-        if (week == 1) {
-            menuItems = Object.values(menu.content.lunch.week1);
-        }
-        if (week == 2) {
-            menuItems = Object.values(menu.content.lunch.week2);
-        }
-
-        //creates the card for the lunch item
-        menuCards[0] = document.createElement("div");
-        menuCards[0].classList = "card border-success mb-3 lunchCards";
-        menuDiv.appendChild(menuCards[0]);
-
-        //creates the name for the lunch item
-        menuNames[0] = document.createElement("p");
-        menuNames[0].innerHTML = menuItems[day].name;
-        menuNames[0].classList = "itemName card-header";
-        menuCards[0].appendChild(menuNames[0]);
-
-        //creates the prices for the lunch item
-        menuPrices[0] = document.createElement("p");
-        menuPrices[0].innerHTML = "Price: $" + menuItems[day].price;
-        menuPrices[0].classList = "priceText";
-        menuCards[0].appendChild(menuPrices[0]);
-
-        //creates the add to cart button for the lunch item
-        menuButtons[0] = document.createElement("button");
-        menuButtons[0].innerHTML = "Add to Cart";
-        menuButtons[0].classList = "btn btn-success addToCart buttonColour";
-        menuButtons[0].setAttribute("onclick", "addItemToCart(menuItems[" + day + "])");
-        menuCards[0].appendChild(menuButtons[0]);
+      //this creates the buttons
+      menuButtons[i] = document.createElement("button");
+      menuButtons[i].innerHTML = "Add to Cart";
+      menuButtons[i].classList = "btn btn-success addToCart buttonColour";
+      menuButtons[i].setAttribute("onclick", "addItemToCart(menuItems[" + i + "])");
+      menuCards[i].appendChild(menuButtons[i]);
     }
+  } else {
+    //display the lunch menu
+    //display the current week's lunch menu
+    if (week == 1) {
+      menuItems = Object.values(menu.content.lunch.week1);
+    }
+    if (week == 2) {
+      menuItems = Object.values(menu.content.lunch.week2);
+    }
+
+		//creates the card for the lunch item
+    menuCards[0] = document.createElement("div");
+    menuCards[0].classList = "card border-success mb-3 lunchCards";
+    menuDiv.appendChild(menuCards[0]);
+
+    //creates the name for the lunch item
+    menuNames[0] = document.createElement("p");
+    menuNames[0].innerHTML = menuItems[day].name;
+    menuNames[0].classList = "itemName card-header";
+    menuCards[0].appendChild(menuNames[0]);
+
+    //creates the prices for the lunch item
+    menuPrices[0] = document.createElement("p");
+    menuPrices[0].innerHTML = "Price: $" + menuItems[day].price;
+    menuPrices[0].classList = "priceText";
+    menuCards[0].appendChild(menuPrices[0]);
+
+    //creates the add to cart button for the lunch item
+    menuButtons[0] = document.createElement("button");
+    menuButtons[0].innerHTML = "Add to Cart";
+    menuButtons[0].classList = "btn btn-success addToCart buttonColour";
+    menuButtons[0].setAttribute("onclick", "addItemToCart(menuItems[" + day + "])");
+    menuCards[0].appendChild(menuButtons[0]);
+  }
 }
 
 function addItemToCart(item) {
-    let lunchContents1 = Object.values(menu.content.lunch.week1);
-    let lunchContents2 = Object.values(menu.content.lunch.week2);
-    if (cartItems.includes(item) == true) {
-        alert("Item is already in cart!");
-    }
-    //if there is less than 3 morning tea items or less than 1 lunch items
-    else if ((morningTeaItems < 3 && time == "morning") || (lunchItems < 1 && time == "lunch")) {
+  if (cartItems.includes(item) == true) {
+    alert("Item is already in cart!");
+  }
+  //if there is less than 3 morning tea items or less than 1 lunch items
+  else if (
+    (morningTeaItems < 3 && time == "morning") ||
+    (lunchItems < 1 && time == "lunch")
+  ) {
     //keep track of how many lunch/morning tea items you have
     if (time == "morning") {
-        morningTeaItems++;
+      morningTeaItems++;
     } else {
-        lunchItems++;
-     }
+      lunchItems++;
+    }
 
     //show the card for the cart
     document.getElementById("checkoutItems").style = "display: flex";
     document.getElementById("total").style = "display: initial";
-    
+
     //add the current item to the cart
     cartItems.push(item);
 
@@ -143,7 +149,7 @@ function addItemToCart(item) {
 
     //adds the remove item button
     cartItemsRemoveButtons.push(document.createElement("button"));
-    cartItemsRemoveButtons[cartItemsRemoveButtons.length - 1].classList = "btn btn-warning removeItem";
+    cartItemsRemoveButtons[cartItemsRemoveButtons.length - 1].classList ="btn btn-warning removeItem";
     cartItemsRemoveButtons[cartItemsRemoveButtons.length - 1].innerHTML = "-";
     cartItemsRemoveButtons[cartItemsRemoveButtons.length - 1].setAttribute("onclick", "removeItem(" + (cartItemsRemoveButtons.length - 1) + ")");
     cartItemsToShow[cartItemsToShow.length - 1].appendChild(cartItemsRemoveButtons[cartItemsRemoveButtons.length - 1]);
@@ -153,22 +159,23 @@ function addItemToCart(item) {
     cartItemsAddButtons[cartItemsAddButtons.length - 1].classList = "btn btn-warning addItem";
     cartItemsAddButtons[cartItemsAddButtons.length - 1].innerHTML = "+";
     cartItemsAddButtons[cartItemsAddButtons.length - 1].setAttribute("onclick", "addItem(" + (cartItemsAddButtons.length - 1) + ")");
-        cartItemsToShow[cartItemsToShow.length - 1].appendChild(cartItemsAddButtons[cartItemsAddButtons.length - 1]);
+    cartItemsToShow[cartItemsToShow.length - 1].appendChild(
+      cartItemsAddButtons[cartItemsAddButtons.length - 1]
+    );
 
-        if (lunchContents1.includes(item) || lunchContents2.includes(item)) {
-            cartItemsAddButtons[cartItemsAddButtons.length - 1].disabled = true;
-        }
-    
+    if (lunchContents1.includes(item) || lunchContents2.includes(item)) {
+      cartItemsAddButtons[cartItemsAddButtons.length - 1].disabled = true;
+    }
+
     //add the total text
     cartAmounts.push(document.createElement("p"));
     cartAmounts[cartAmounts.length - 1].innerHTML = 1;
     cartAmounts[cartAmounts.length - 1].classList = "itemCount";
     cartItemsToShow[cartItemsToShow.length - 1].appendChild(cartAmounts[cartAmounts.length - 1]);
-      
+
     //make the total price update
     document.getElementById("totalPrice").innerHTML = "Total: $" + totalPrice;
   } else {
-
     //make sure there is not too many items going in the cart.
     if (time == "morning") {
       alert("You can have a maximum of 3 items at morning tea.");
@@ -203,27 +210,33 @@ function toggleCredentialScreen() {
 }
 
 function removeItem(index) {
-  
   //remove one from the item's total, if there is more than one
   if (cartAmounts[index].innerHTML > 1) {
     //re-enable the cart button, if it is disabled
-    cartItemsAddButtons[index].disabled = false; 
-    
+    cartItemsAddButtons[index].disabled = false;
+
     //take away one from the total amount
     cartAmounts[index].innerHTML--;
-    
+
     //update the total price
     totalPrice -= cartItems[index].price;
     document.getElementById("totalPrice").innerHTML = "Total: $" + totalPrice;
   }
   //if there is only one, then remove the card.
   else {
-    let cf = confirm("Are you sure you want to remove this item from the cart?")
-    if (cf) {
+    if (confirm("Are you sure you want to remove this item from the cart?")) {
+
+			//if it is a lunch item, remove that item from the lunch total, else remove it from the morning tea items.
+			if (lunchContents1.includes(cartItems[index]) || lunchContents1.includes(cartItems[index])) {
+				lunchItems--;
+			} else {
+				morningTeaItems--;
+			}
+
       //update the total price
       totalPrice -= cartItems[index].price;
       document.getElementById("totalPrice").innerHTML = "Total: $" + totalPrice;
-      
+
       //remove the card of the item being removed
       cartItemsToShow[index].parentNode.removeChild(cartItemsToShow[index]);
 
@@ -258,18 +271,25 @@ function addItem(index) {
   if (cartAmounts[index].innerHTML == 2) {
     cartItemsAddButtons[index].disabled = true;
   }
-  
+
   //add one to the item's total
   cartAmounts[index].innerHTML++;
-  
+
   //update the total price
   totalPrice += parseInt(cartItems[index].price);
   document.getElementById("totalPrice").innerHTML = "Total: $" + totalPrice;
 }
 
 function changeMenu(timeSelected) {
-	document.getElementById(time).disabled = false;
-	time = timeSelected;
+	//this function changes the menu from morning tea to lunch and vice versa
+  document.getElementById(time).disabled = false;
+  time = timeSelected;
+  showMenu();
+  document.getElementById(time).disabled = true;
+}
+
+function updateLunches(wk, dy) {
+	week = wk;
+	day = dy;
 	showMenu();
-	document.getElementById(time).disabled = true;
 }
