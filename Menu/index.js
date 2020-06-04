@@ -41,7 +41,9 @@ showMenu();
 //this displays all of the menu elements including their cards, titles, prices and buttons.
 function showMenu() {
   menuDiv.innerHTML = "";
-  if (time == "morning") {
+  if (screen == 1) {
+
+  } else if (time == "morning") {
 		//display the morning tea menu
 		//get the morning tea options from the object
     menuItems = Object.values(menu.content.morningTea);
@@ -189,13 +191,17 @@ function goToCart() {
   if (screen == 0) {
     //move to the cart screen
     document.getElementById("content").style = "transform: translateX(-100%)";
-    document.getElementById("html").style = "overflow-y: hidden";
+    // document.getElementById("html").style = "overflow-y: hidden";
     screen = 1;
+    setTimeout(function(){
+      showMenu();
+    }, 500);
   } else {
     //move to the menu screen
     document.getElementById("content").style = "transform: translateX(0)";
     document.getElementById("html").style = "overflow-y: initial";
     screen = 0;
+    showMenu();
   }
 }
 
