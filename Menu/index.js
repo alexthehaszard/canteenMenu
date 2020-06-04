@@ -1,6 +1,10 @@
 //what screen is being showed, the menu or the checkout.
 let screen = 0;
 
+//how many items of each type are in the cart
+let morningTeaItems = 0;
+let lunchItems = 0;
+
 //the cart items, their name elements and their price elements. all in arrays.
 let cartItems = [];
 let cartItemsToShow = [];
@@ -18,96 +22,85 @@ let menuButtons = [];
 //get the menuItems div for later use
 let menuDiv = document.getElementById("menuItems");
 
-//these are used to tell what should be on the menu
-const today = new Date;
-let time;
-if (today.getHours() < 12) {
-    time = "morning";
-} else {
-    time = "lunch";
-}
-let week = 1;
-let day = 0;
-
 //what is on the current menu
 let menuItems;
-
-//what menu title is displayed, morning or lunch.
-let menuTitle = document.createElement("p");
-menuTitle.id = "menuTitle";
-menuTitle.classList = "headers";
-document.getElementById("header").appendChild(menuTitle);
 
 //the total price
 let totalPrice = 0;
 
+//these are used to tell what should be on the menu
+let week = 1;
+let day = 0;
+let time = "morning";
+showMenu();
+
 //this displays all of the menu elements including their cards, titles, prices and buttons.
-if (time == "morning") {
-  //if the time is morning, show the morning menu and title.
-  menuTitle.innerHTML = "Morning Tea Menu";
-  menuItems = Object.values(menu.content.morningTea);
+function showMenu() {
+		menuDiv.innerHTML = "";
+    if (time == "morning") {
+        menuItems = Object.values(menu.content.morningTea);
 
-  for (let i = 0; i < menuItems.length; i++) {
-    //add each item from the menu object into their cards and onto the screen
-    //this creates the cards
-    menuCards[i] = document.createElement("div");
-    menuCards[i].classList = "card border-success mb-3 menuCards";
-    menuDiv.appendChild(menuCards[i]);
+        for (let i = 0; i < menuItems.length; i++) {
+            //add each item from the menu object into their cards and onto the screen
+            //this creates the cards
+            menuCards[i] = document.createElement("div");
+            menuCards[i].classList = "card border-success mb-3 menuCards";
+            menuDiv.appendChild(menuCards[i]);
 
-    //this creates the names
-    menuNames[i] = document.createElement("p");
-    menuNames[i].innerHTML = menuItems[i].name;
-    menuNames[i].classList = "itemName card-header";
-    menuCards[i].appendChild(menuNames[i]);
+            //this creates the names
+            menuNames[i] = document.createElement("p");
+            menuNames[i].innerHTML = menuItems[i].name;
+            menuNames[i].classList = "itemName card-header";
+            menuCards[i].appendChild(menuNames[i]);
 
-    //this creates the prices
-    menuPrices[i] = document.createElement("p");
-    menuPrices[i].innerHTML = "Price: $" + menuItems[i].price;
-    menuPrices[i].classList = "priceText";
-    menuCards[i].appendChild(menuPrices[i]);
+            //this creates the prices
+            menuPrices[i] = document.createElement("p");
+            menuPrices[i].innerHTML = "Price: $" + menuItems[i].price;
+            menuPrices[i].classList = "priceText";
+            menuCards[i].appendChild(menuPrices[i]);
 
-    //this creates the buttons
-    menuButtons[i] = document.createElement("button");
-    menuButtons[i].innerHTML = "Add to Cart";
-    menuButtons[i].classList = "btn btn-success addToCart buttonColour";
-    menuButtons[i].setAttribute("onclick", "addItemToCart(menuItems[" + i + "])");
-    menuCards[i].appendChild(menuButtons[i]);
-  }
-} else {
-  //display the lunch menu
-  menuTitle.innerHTML = "Lunch Menu";
+            //this creates the buttons
+            menuButtons[i] = document.createElement("button");
+            menuButtons[i].innerHTML = "Add to Cart";
+            menuButtons[i].classList = "btn btn-success addToCart buttonColour";
+            menuButtons[i].setAttribute("onclick", "addItemToCart(menuItems[" + i + "])");
+            menuCards[i].appendChild(menuButtons[i]);
+        }
+    } else {
+        //display the lunch menu
 
-  //display the current week's lunch menu
-  if (week == 1) {
-    menuItems = Object.values(menu.content.lunch.week1);
-  }
-  if (week == 2) {
-    menuItems = Object.values(menu.content.lunch.week2);
-  }
+        //display the current week's lunch menu
+        if (week == 1) {
+            menuItems = Object.values(menu.content.lunch.week1);
+        }
+        if (week == 2) {
+            menuItems = Object.values(menu.content.lunch.week2);
+        }
 
-  //creates the card for the lunch item
-  menuCards[0] = document.createElement("div");
-  menuCards[0].classList = "card border-success mb-3 lunchCards";
-  menuDiv.appendChild(menuCards[0]);
+        //creates the card for the lunch item
+        menuCards[0] = document.createElement("div");
+        menuCards[0].classList = "card border-success mb-3 lunchCards";
+        menuDiv.appendChild(menuCards[0]);
 
-  //creates the name for the lunch item
-  menuNames[0] = document.createElement("p");
-  menuNames[0].innerHTML = menuItems[day].name;
-  menuNames[0].classList = "itemName card-header";
-  menuCards[0].appendChild(menuNames[0]);
+        //creates the name for the lunch item
+        menuNames[0] = document.createElement("p");
+        menuNames[0].innerHTML = menuItems[day].name;
+        menuNames[0].classList = "itemName card-header";
+        menuCards[0].appendChild(menuNames[0]);
 
-  //creates the prices for the lunch item
-  menuPrices[0] = document.createElement("p");
-  menuPrices[0].innerHTML = "Price: $" + menuItems[day].price;
-  menuPrices[0].classList = "priceText";
-  menuCards[0].appendChild(menuPrices[0]);
+        //creates the prices for the lunch item
+        menuPrices[0] = document.createElement("p");
+        menuPrices[0].innerHTML = "Price: $" + menuItems[day].price;
+        menuPrices[0].classList = "priceText";
+        menuCards[0].appendChild(menuPrices[0]);
 
-  //creates the add to cart button for the lunch item
-  menuButtons[0] = document.createElement("button");
-  menuButtons[0].innerHTML = "Add to Cart";
-  menuButtons[0].classList = "btn btn-success addToCart buttonColour";
-  menuButtons[0].setAttribute("onclick", "addItemToCart(menuItems[" + day + "])");
-  menuCards[0].appendChild(menuButtons[0]);
+        //creates the add to cart button for the lunch item
+        menuButtons[0] = document.createElement("button");
+        menuButtons[0].innerHTML = "Add to Cart";
+        menuButtons[0].classList = "btn btn-success addToCart buttonColour";
+        menuButtons[0].setAttribute("onclick", "addItemToCart(menuItems[" + day + "])");
+        menuCards[0].appendChild(menuButtons[0]);
+    }
 }
 
 function addItemToCart(item) {
@@ -115,7 +108,14 @@ function addItemToCart(item) {
         alert("Item is already in cart!");
     }
     //if there is less than 3 morning tea items or less than 1 lunch items
-    else if ((document.getElementById("cartNumber").innerHTML < 3 && time == "morning") || (document.getElementById("cartNumber").innerHTML < 1 && time == "lunch")) {
+    else if ((morningTeaItems < 3 && time == "morning") || (lunchItems < 1 && time == "lunch")) {
+    //keep track of how many lunch/morning tea items you have
+    if (time == "morning") {
+        morningTeaItems++;
+    } else {
+        lunchItems++;
+    }
+
     //show the card for the cart
     document.getElementById("checkoutItems").style = "display: flex";
     document.getElementById("total").style = "display: initial";
@@ -143,14 +143,14 @@ function addItemToCart(item) {
     cartItemsRemoveButtons.push(document.createElement("button"));
     cartItemsRemoveButtons[cartItemsRemoveButtons.length - 1].classList = "btn btn-warning removeItem";
     cartItemsRemoveButtons[cartItemsRemoveButtons.length - 1].innerHTML = "-";
-    cartItemsRemoveButtons[cartItemsRemoveButtons.length - 1].setAttribute("onclick", "removeItem(" + (cartItemsRemoveButtons.length - 1) + ")")
+    cartItemsRemoveButtons[cartItemsRemoveButtons.length - 1].setAttribute("onclick", "removeItem(" + (cartItemsRemoveButtons.length - 1) + ")");
     cartItemsToShow[cartItemsToShow.length - 1].appendChild(cartItemsRemoveButtons[cartItemsRemoveButtons.length - 1]);
 
     //add the add item button
     cartItemsAddButtons.push(document.createElement("button"));
     cartItemsAddButtons[cartItemsAddButtons.length - 1].classList = "btn btn-warning addItem";
     cartItemsAddButtons[cartItemsAddButtons.length - 1].innerHTML = "+";
-    cartItemsAddButtons[cartItemsAddButtons.length - 1].setAttribute("onclick", "addItem(" + (cartItemsAddButtons.length - 1) + ")")
+    cartItemsAddButtons[cartItemsAddButtons.length - 1].setAttribute("onclick", "addItem(" + (cartItemsAddButtons.length - 1) + ")");
     cartItemsToShow[cartItemsToShow.length - 1].appendChild(cartItemsAddButtons[cartItemsAddButtons.length - 1]);
     
     //add the total text
@@ -259,4 +259,11 @@ function addItem(index) {
   //update the total price
   totalPrice += parseInt(cartItems[index].price);
   document.getElementById("totalPrice").innerHTML = "Total: $" + totalPrice;
+}
+
+function changeMenu(timeSelected) {
+	document.getElementById(time).disabled = false;
+	time = timeSelected;
+	showMenu();
+	document.getElementById(time).disabled = true;
 }
