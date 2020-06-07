@@ -24,11 +24,24 @@
     <div id="content">
       <!-- this is for the first screen, the menu -->
       <div id="menu">
-				<!-- this is to show the buttons to change the menu -->
-				<div id="menuNavigation" class="input-group">
-					<button id="morning" class="btn btn-success menuNavButton" onclick="changeMenu('morning')" disabled>Morning Tea</button>
-					<button id="lunch" class="btn btn-success menuNavButton" onclick="changeMenu('lunch')">Lunch</button>
-				</div>
+		    <!-- this is to show the buttons to change the menu -->
+		    <div id="menuNavigation" class="input-group">
+		    <button id="morning" class="btn btn-success menu-nav-button" onclick="changeMenu('morning')" disabled>Morning Tea</button>
+		    <button id="lunch" class="btn btn-success menu-nav-button" onclick="changeMenu('lunch')">Lunch</button>
+          <div id="dropdownMenu" class="dropdown">
+            <button id="toggleDropdown" class="dropdown-toggle btn btn-secondary menu-nav-button" onclick="toggleDropdown()">Day </button>
+            <div id="dropdownItems" class="dropdown-menu dropdown-menu-right">
+              <button id="setWeek1" class="dropdown-item">Week 1</button>
+              <div id="week1Items">
+                <button class="dropdown-item" onclick="updateLunches(week, 0)">Monday</button>
+                <button class="dropdown-item" onclick="updateLunches(week, 1)">Tuesday</button>
+                <button class="dropdown-item" onclick="updateLunches(week, 2)">Wednesday</button>
+                <button class="dropdown-item" onclick="updateLunches(week, 3)">Thursday</button>
+                <button class="dropdown-item" onclick="updateLunches(week, 4)">Friday</button>
+              </div>
+            </div>
+          </div>
+	      </div>
         <div id="header"></div>
         <div id="menuItems"></div>
       </div>

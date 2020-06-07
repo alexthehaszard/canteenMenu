@@ -23,6 +23,9 @@ let menuNames = [];
 let menuPrices = [];
 let menuButtons = [];
 
+//if the day dropdown menu is open
+let dropdownOpen = false;
+
 //get the menuItems div for later use
 let menuDiv = document.getElementById("menuItems");
 
@@ -44,8 +47,8 @@ function showMenu() {
   if (screen == 1) {
 
   } else if (time == "morning") {
-		//display the morning tea menu
-		//get the morning tea options from the object
+	//display the morning tea menu
+	//get the morning tea options from the object
     menuItems = Object.values(menu.content.morningTea);
 
     for (let i = 0; i < menuItems.length; i++) {
@@ -83,8 +86,8 @@ function showMenu() {
     if (week == 2) {
       menuItems = Object.values(menu.content.lunch.week2);
     }
-
-		//creates the card for the lunch item
+    
+    //creates the card for the lunch item
     menuCards[0] = document.createElement("div");
     menuCards[0].classList = "card border-success mb-3 lunchCards";
     menuDiv.appendChild(menuCards[0]);
@@ -116,9 +119,7 @@ function addItemToCart(item) {
   }
   //if there is less than 3 morning tea items or less than 1 lunch items
   else if (
-    (morningTeaItems < 3 && time == "morning") ||
-    (lunchItems < 1 && time == "lunch")
-  ) {
+    (morningTeaItems < 3 && time == "morning") || (lunchItems < 1 && time == "lunch")) {
     //keep track of how many lunch/morning tea items you have
     if (time == "morning") {
       morningTeaItems++;
@@ -161,9 +162,7 @@ function addItemToCart(item) {
     cartItemsAddButtons[cartItemsAddButtons.length - 1].classList = "btn btn-warning addItem";
     cartItemsAddButtons[cartItemsAddButtons.length - 1].innerHTML = "+";
     cartItemsAddButtons[cartItemsAddButtons.length - 1].setAttribute("onclick", "addItem(" + (cartItemsAddButtons.length - 1) + ")");
-    cartItemsToShow[cartItemsToShow.length - 1].appendChild(
-      cartItemsAddButtons[cartItemsAddButtons.length - 1]
-    );
+    cartItemsToShow[cartItemsToShow.length - 1].appendChild(cartItemsAddButtons[cartItemsAddButtons.length - 1]);
 
     if (lunchContents1.includes(item) || lunchContents2.includes(item)) {
       cartItemsAddButtons[cartItemsAddButtons.length - 1].disabled = true;
@@ -193,6 +192,7 @@ function goToCart() {
     document.getElementById("content").style = "transform: translateX(-100%)";
     // document.getElementById("html").style = "overflow-y: hidden";
     screen = 1;
+    //after 500ms, remove the screen that is not being looked at.
     setTimeout(function(){
       showMenu();
     }, 500);
@@ -231,8 +231,7 @@ function removeItem(index) {
   //if there is only one, then remove the card.
   else {
     if (confirm("Are you sure you want to remove this item from the cart?")) {
-
-			//if it is a lunch item, remove that item from the lunch total, else remove it from the morning tea items.
+	    //if it is a lunch item, remove that item from the lunch total, else remove it from the morning tea items.
 			if (lunchContents1.includes(cartItems[index]) || lunchContents1.includes(cartItems[index])) {
 				lunchItems--;
 			} else {
@@ -298,4 +297,18 @@ function updateLunches(wk, dy) {
 	week = wk;
 	day = dy;
 	showMenu();
+}
+
+function toggleDropdown() {
+  if (dropdownOpen === false) {
+    document.getElementById("dropdownItems").style = "display: initial";
+    dropdownOpen = true;
+  } else {
+    document.getElementById("dropdownItems").style = "display: none";
+    dropdownOpen = false;
+  }
+}
+
+function toggleWeekDropdown {
+
 }
