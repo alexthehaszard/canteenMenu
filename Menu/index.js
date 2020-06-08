@@ -41,15 +41,18 @@ let day = 0;
 let time = "morning";
 showMenu();
 
+//the max amount of a certain
+let maxMorningTea = 3;
+let maxLunch = 1;
+
 //this displays all of the menu elements including their cards, titles, prices and buttons.
 function showMenu() {
   menuDiv.innerHTML = "";
-  if (screen == 1) {
-
-  } else if (time == "morning") {
+  if (time === "morning" && screen !== 1) {
 	//display the morning tea menu
 	//get the morning tea options from the object
     menuItems = Object.values(menu.content.morningTea);
+    console.log(menuItems);
 
     for (let i = 0; i < menuItems.length; i++) {
       //add each item from the menu object into their cards and onto the screen
@@ -80,10 +83,10 @@ function showMenu() {
   } else {
     //display the lunch menu
     //display the current week's lunch menu
-    if (week == 1) {
+    if (week === 1) {
       menuItems = Object.values(menu.content.lunch.week1);
     }
-    if (week == 2) {
+    if (week === 2) {
       menuItems = Object.values(menu.content.lunch.week2);
     }
     
@@ -114,14 +117,13 @@ function showMenu() {
 }
 
 function addItemToCart(item) {
-  if (cartItems.includes(item) == true) {
+  if (cartItems.includes(item) === true) {
     alert("Item is already in cart!");
   }
   //if there is less than 3 morning tea items or less than 1 lunch items
-  else if (
-    (morningTeaItems < 3 && time == "morning") || (lunchItems < 1 && time == "lunch")) {
+  else if ((morningTeaItems < maxMorningTea && time === "morning") || (lunchItems < maxLunch && time === "lunch")) {
     //keep track of how many lunch/morning tea items you have
-    if (time == "morning") {
+    if (time === "morning") {
       morningTeaItems++;
     } else {
       lunchItems++;
@@ -178,7 +180,7 @@ function addItemToCart(item) {
     document.getElementById("totalPrice").innerHTML = "Total: $" + totalPrice;
   } else {
     //make sure there is not too many items going in the cart.
-    if (time == "morning") {
+    if (time === "morning") {
       alert("You can have a maximum of 3 items at morning tea.");
     } else {
       alert("You can only have 1 lunch item.");
@@ -187,7 +189,7 @@ function addItemToCart(item) {
 }
 
 function goToCart() {
-  if (screen == 0) {
+  if (screen === 0) {
     //move to the cart screen
     document.getElementById("content").style = "transform: translateX(-100%)";
     // document.getElementById("html").style = "overflow-y: hidden";
@@ -205,8 +207,10 @@ function goToCart() {
   }
 }
 
+
+//opens the place order screen
 function toggleCredentialScreen() {
-  if (screen != 2) {
+  if (screen !== 2) {
     document.getElementById("credentials").style = "display: inherit";
     screen = 2;
   } else {
@@ -231,7 +235,7 @@ function removeItem(index) {
   //if there is only one, then remove the card.
   else {
     if (confirm("Are you sure you want to remove this item from the cart?")) {
-	    //if it is a lunch item, remove that item from the lunch total, else remove it from the morning tea items.
+      //if it is a lunch item, remove that item from the lunch total, else remove it from the morning tea items.
 			if (lunchContents1.includes(cartItems[index]) || lunchContents1.includes(cartItems[index])) {
 				lunchItems--;
 			} else {
@@ -273,7 +277,7 @@ function removeItem(index) {
 
 function addItem(index) {
   //if there is 3, then disable the button
-  if (cartAmounts[index].innerHTML == 2) {
+  if (cartAmounts[index].innerHTML === 2) {
     cartItemsAddButtons[index].disabled = true;
   }
 
@@ -293,17 +297,19 @@ function changeMenu(timeSelected) {
   document.getElementById(time).disabled = true;
 }
 
+//updates the lunches menu
 function updateLunches(wk, dy) {
 	week = wk;
 	day = dy;
 	showMenu();
 }
 
+//opens and changes the dropdown menu for changing the day.
 function toggleDropdown(id, newid) {
-  if (newid == null) {
+  if (newid === null) {
     document.getElementById(id).style = "display: none";
   } else {
-    if (id != null) {
+    if (id !== null) {
       document.getElementById(id).style = "display: none";
     }
     document.getElementById(newid).style = "display: initial";
