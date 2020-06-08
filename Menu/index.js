@@ -299,16 +299,13 @@ function updateLunches(wk, dy) {
 	showMenu();
 }
 
-function toggleDropdown() {
-  if (dropdownOpen === false) {
-    document.getElementById("dropdownItems").style = "display: initial";
-    dropdownOpen = true;
+function toggleDropdown(id, newid) {
+  if (newid == null) {
+    document.getElementById(id).style = "display: none";
   } else {
-    document.getElementById("dropdownItems").style = "display: none";
-    dropdownOpen = false;
+    if (id != null) {
+      document.getElementById(id).style = "display: none";
+    }
+    document.getElementById(newid).style = "display: initial";
   }
-}
-
-function toggleWeekDropdown {
-
 }

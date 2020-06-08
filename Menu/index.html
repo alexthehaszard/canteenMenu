@@ -29,16 +29,17 @@
 		    <button id="morning" class="btn btn-success menu-nav-button" onclick="changeMenu('morning')" disabled>Morning Tea</button>
 		    <button id="lunch" class="btn btn-success menu-nav-button" onclick="changeMenu('lunch')">Lunch</button>
           <div id="dropdownMenu" class="dropdown">
-            <button id="toggleDropdown" class="dropdown-toggle btn btn-secondary menu-nav-button" onclick="toggleDropdown()">Day </button>
-            <div id="dropdownItems" class="dropdown-menu dropdown-menu-right">
-              <button id="setWeek1" class="dropdown-item">Week 1</button>
-              <div id="week1Items">
-                <button class="dropdown-item" onclick="updateLunches(week, 0)">Monday</button>
-                <button class="dropdown-item" onclick="updateLunches(week, 1)">Tuesday</button>
-                <button class="dropdown-item" onclick="updateLunches(week, 2)">Wednesday</button>
-                <button class="dropdown-item" onclick="updateLunches(week, 3)">Thursday</button>
-                <button class="dropdown-item" onclick="updateLunches(week, 4)">Friday</button>
-              </div>
+            <button id="toggleDropdown" class="dropdown-toggle btn btn-secondary menu-nav-button" onclick="toggleDropdown(null, 'dropdownWeeks')">Day </button>
+            <div id="dropdownWeeks" class="dropdown-menu dropdown-menu-right">
+              <button class="dropdown-item" onclick="updateLunches(1, day); toggleDropdown('dropdownWeeks', 'dropdownDays')">Week 1</button>
+              <button class="dropdown-item" onclick="updateLunches(2, day); toggleDropdown('dropdownWeeks', 'dropdownDays')">Week 2</button>
+            </div>
+            <div id="dropdownDays" class="dropdown-menu dropdown-menu-right">
+              <button class="dropdown-item" onclick="updateLunches(week, 0); toggleDropdown('dropdownDays', null)">Monday</button>
+              <button class="dropdown-item" onclick="updateLunches(week, 1); toggleDropdown('dropdownDays', null)">Tuesday</button>
+              <button class="dropdown-item" onclick="updateLunches(week, 2); toggleDropdown('dropdownDays', null)">Wednesday</button>
+              <button class="dropdown-item" onclick="updateLunches(week, 3); toggleDropdown('dropdownDays', null)">Thursday</button>
+              <button class="dropdown-item" onclick="updateLunches(week, 4); toggleDropdown('dropdownDays', null)">Friday</button>
             </div>
           </div>
 	      </div>
@@ -59,9 +60,9 @@
         <div id="credentials" style="display: none;">
           <div id="inputCredentials" class="card border-secondary mb-3">
             <button id="closeCredentials" class="btn btn-danger" onclick="toggleCredentialScreen()">X</button>
-            <input placeholder="Full Name" id="inputName" class="inputs" type="text"></input>
-            <input placeholder="Tutor Group" id="inputTutorGroup" class="inputs mgt5" type="text"></input>
-            <input placeholder="Student ID" id="inputStudentID" class="inputs mgt5" type="number"></input>
+            <input placeholder="Full Name" id="inputName" class="inputs" type="text">
+            <input placeholder="Tutor Group" id="inputTutorGroup" class="inputs mgt5" type="text">
+            <input placeholder="Student ID" id="inputStudentID" class="inputs mgt5" type="number">
             <button id="buyButton" class="btn btn-success mgt10 buttonColour">Place Order</button>
           </div>
         </div>
