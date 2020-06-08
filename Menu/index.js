@@ -55,7 +55,7 @@ function showMenu() {
       //add each item from the menu object into their cards and onto the screen
       //this creates the cards
       menuCards[i] = document.createElement("div");
-      menuCards[i].classList = "card border-success mb-3 menuCards";
+      menuCards[i].classList = "card mb-3 menuCards";
       menuDiv.appendChild(menuCards[i]);
 
       //this creates the names
@@ -89,7 +89,7 @@ function showMenu() {
     
     //creates the card for the lunch item
     menuCards[0] = document.createElement("div");
-    menuCards[0].classList = "card border-success mb-3 lunchCards";
+    menuCards[0].classList = "card mb-3 lunchCards";
     menuDiv.appendChild(menuCards[0]);
 
     //creates the name for the lunch item
