@@ -9,7 +9,7 @@ let lunchItems = 0;
 let lunchContents1 = Object.values(menu.content.lunch.week1);
 let lunchContents2 = Object.values(menu.content.lunch.week2);
 
-//the cart items, their name elements and their price elements. all in arrays.
+//the cart items, their name elements and their price elements. all in lists.
 let cartItems = [];
 let cartItemsToShow = [];
 let cartPricesToShow = [];
@@ -17,11 +17,14 @@ let cartItemsRemoveButtons = [];
 let cartItemsAddButtons = [];
 let cartAmounts = [];
 
-//all of the elements needed to make the cards for the menu, all in arrays.
+//all of the elements needed to make the cards for the menu, all in lists.
 let menuCards = [];
 let menuNames = [];
 let menuPrices = [];
 let menuButtons = [];
+
+//order complete list of elements.
+let orderCompleteElements = [];
 
 //if the day dropdown menu is open
 let dropdownOpen = false;
@@ -52,7 +55,6 @@ function showMenu() {
 	//display the morning tea menu
 	//get the morning tea options from the object
     menuItems = Object.values(menu.content.morningTea);
-    console.log(menuItems);
 
     for (let i = 0; i < menuItems.length; i++) {
       //add each item from the menu object into their cards and onto the screen
@@ -313,5 +315,16 @@ function toggleDropdown(id, newid) {
       document.getElementById(id).style = "display: none";
     }
     document.getElementById(newid).style = "display: initial";
+  }
+}
+
+//opens the completed order screen.
+function completeOrder() {
+  document.getElementById("credentials").style = "display: none";
+  document.getElementById("orderComplete").style = "display: initial";
+  for (let i = 0; i < cartItems.length; i++) {
+    orderCompleteElements[i] = document.createElement('p');
+    orderCompleteElements[i].innerHTML = "x" + cartAmounts[i].innerHTML + " " + cartItems[i].name;
+    document.getElementById("orderCompleteCard").appendChild(orderCompleteElements[i]);
   }
 }

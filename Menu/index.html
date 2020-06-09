@@ -60,14 +60,18 @@
         <div id="credentials" style="display: none;">
           <div id="inputCredentials" class="card border-secondary mb-3">
             <button id="closeCredentials" class="btn btn-danger" onclick="toggleCredentialScreen()">X</button>
-            <input placeholder="Full Name" id="inputName" class="inputs" type="text">
-            <input placeholder="Tutor Group" id="inputTutorGroup" class="inputs mgt5" type="text">
-            <input placeholder="Student ID" id="inputStudentID" class="inputs mgt5" type="number">
-            <button id="buyButton" class="btn btn-success mgt10 buttonColour">Place Order</button>
+            <input placeholder="Full Name" id="inputName" class="inputs" type="text" />
+            <input placeholder="Tutor Group" id="inputTutorGroup" class="inputs mgt5" type="text" />
+            <input placeholder="Student ID" id="inputStudentID" class="inputs mgt5" type="number" />
+            <button id="buyButton" class="btn btn-success mgt10 buttonColour" onclick="completeOrder('orderCompleteCard')">Place Order</button>
+          </div>
+        </div>
+        <div id="orderComplete">
+          <div id="orderCompleteCard" class="card mgt10">
+            <p class="card-header">Order complete!<br />You ordered:</p>
           </div>
         </div>
       </div>
     </div>
-    <!-- set up the scripts -->
   </body>
 </html>

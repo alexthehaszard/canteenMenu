@@ -49,7 +49,6 @@
 
 .headers {
   position: relative;
-  font-size: min(5vw, 2.5rem);
   left: 50%;
   margin-top: 5px;
   transform: translateX(-50%);
@@ -262,6 +261,23 @@ body {
   width: max-content;
   top: 5px;
   right: 5px;
+}
+
+#orderComplete {
+  display: none;
+  position: fixed;
+  z-index: 2;
+  background-color: rgba(0, 0, 0, 0.5);
+  width: 100%;
+  top: 0;
+  height: 100vh;
+}
+
+#orderCompleteCard {
+  text-align: center;
+  width: min(80vw, 320px);
+  left: 50%;
+  transform: translateX(-50%);
 }
 
 input::-webkit-outer-spin-button,
