@@ -60,25 +60,25 @@ function showMenu() {
       //add each item from the menu object into their cards and onto the screen
       //this creates the cards
       menuCards[i] = document.createElement("div");
-      menuCards[i].classList = "card mb-3 menuCards";
+      menuCards[i].classList = "card mb-3 menu-cards";
       menuDiv.appendChild(menuCards[i]);
 
       //this creates the names
       menuNames[i] = document.createElement("p");
       menuNames[i].innerHTML = menuItems[i].name;
-      menuNames[i].classList = "itemName card-header";
+      menuNames[i].classList = "item-name card-header";
       menuCards[i].appendChild(menuNames[i]);
 
       //this creates the prices
       menuPrices[i] = document.createElement("p");
       menuPrices[i].innerHTML = "Price: $" + menuItems[i].price;
-      menuPrices[i].classList = "priceText";
+      menuPrices[i].classList = "price-text";
       menuCards[i].appendChild(menuPrices[i]);
 
       //this creates the buttons
       menuButtons[i] = document.createElement("button");
       menuButtons[i].innerHTML = "Add to Cart";
-      menuButtons[i].classList = "btn btn-success addToCart buttonColour";
+      menuButtons[i].classList = "btn btn-success add-to-cart button-colour";
       menuButtons[i].setAttribute("onclick", "addItemToCart(menuItems[" + i + "])");
       menuCards[i].appendChild(menuButtons[i]);
     }
@@ -94,25 +94,25 @@ function showMenu() {
     
     //creates the card for the lunch item
     menuCards[0] = document.createElement("div");
-    menuCards[0].classList = "card mb-3 lunchCards";
+    menuCards[0].classList = "card mb-3 lunch-cards";
     menuDiv.appendChild(menuCards[0]);
 
     //creates the name for the lunch item
     menuNames[0] = document.createElement("p");
     menuNames[0].innerHTML = menuItems[day].name;
-    menuNames[0].classList = "itemName card-header";
+    menuNames[0].classList = "item-name card-header";
     menuCards[0].appendChild(menuNames[0]);
 
     //creates the prices for the lunch item
     menuPrices[0] = document.createElement("p");
     menuPrices[0].innerHTML = "Price: $" + menuItems[day].price;
-    menuPrices[0].classList = "priceText";
+    menuPrices[0].classList = "price-text";
     menuCards[0].appendChild(menuPrices[0]);
 
     //creates the add to cart button for the lunch item
     menuButtons[0] = document.createElement("button");
     menuButtons[0].innerHTML = "Add to Cart";
-    menuButtons[0].classList = "btn btn-success addToCart buttonColour";
+    menuButtons[0].classList = "btn btn-success add-to-cart button-colour";
     menuButtons[0].setAttribute("onclick", "addItemToCart(menuItems[" + day + "])");
     menuCards[0].appendChild(menuButtons[0]);
   }
@@ -143,27 +143,27 @@ function addItemToCart(item) {
 
     //add a list element, give it classes, put it inside the ul element and display the items name
     cartItemsToShow.push(document.createElement("li"));
-    cartItemsToShow[cartItemsToShow.length - 1].classList = "list-group-item checkoutItem";
+    cartItemsToShow[cartItemsToShow.length - 1].classList = "list-group-item checkout-item";
     cartItemsToShow[cartItemsToShow.length - 1].innerHTML = cartItems[cartItems.length - 1].name;
     document.getElementById("checkoutList").appendChild(cartItemsToShow[cartItemsToShow.length - 1]);
 
     //add a p element, give it classes, put it inside of li element and display the price.
     cartPricesToShow.push(document.createElement("p"));
-    cartPricesToShow[cartPricesToShow.length - 1].classList = "listPrice";
+    cartPricesToShow[cartPricesToShow.length - 1].classList = "list-price";
     cartPricesToShow[cartPricesToShow.length - 1].innerHTML = "$" + cartItems[cartItems.length - 1].price;
     cartItemsToShow[cartItemsToShow.length - 1].appendChild(cartPricesToShow[cartPricesToShow.length - 1]);
     totalPrice += parseFloat(cartItems[cartItems.length - 1].price);
 
     //adds the remove item button
     cartItemsRemoveButtons.push(document.createElement("button"));
-    cartItemsRemoveButtons[cartItemsRemoveButtons.length - 1].classList ="btn btn-warning removeItem";
+    cartItemsRemoveButtons[cartItemsRemoveButtons.length - 1].classList ="btn btn-warning remove-item";
     cartItemsRemoveButtons[cartItemsRemoveButtons.length - 1].innerHTML = "-";
     cartItemsRemoveButtons[cartItemsRemoveButtons.length - 1].setAttribute("onclick", "removeItem(" + (cartItemsRemoveButtons.length - 1) + ")");
     cartItemsToShow[cartItemsToShow.length - 1].appendChild(cartItemsRemoveButtons[cartItemsRemoveButtons.length - 1]);
 
     //add the add item button
     cartItemsAddButtons.push(document.createElement("button"));
-    cartItemsAddButtons[cartItemsAddButtons.length - 1].classList = "btn btn-warning addItem";
+    cartItemsAddButtons[cartItemsAddButtons.length - 1].classList = "btn btn-warning add-item";
     cartItemsAddButtons[cartItemsAddButtons.length - 1].innerHTML = "+";
     cartItemsAddButtons[cartItemsAddButtons.length - 1].setAttribute("onclick", "addItem(" + (cartItemsAddButtons.length - 1) + ")");
     cartItemsToShow[cartItemsToShow.length - 1].appendChild(cartItemsAddButtons[cartItemsAddButtons.length - 1]);
@@ -175,7 +175,7 @@ function addItemToCart(item) {
     //add the total text
     cartAmounts.push(document.createElement("p"));
     cartAmounts[cartAmounts.length - 1].innerHTML = 1;
-    cartAmounts[cartAmounts.length - 1].classList = "itemCount";
+    cartAmounts[cartAmounts.length - 1].classList = "item-count";
     cartItemsToShow[cartItemsToShow.length - 1].appendChild(cartAmounts[cartAmounts.length - 1]);
 
     //make the total price update
@@ -279,7 +279,7 @@ function removeItem(index) {
 
 function addItem(index) {
   //if there is 3, then disable the button
-  if (cartAmounts[index].innerHTML === 2) {
+  if (cartAmounts[index].innerHTML === '2') {
     cartItemsAddButtons[index].disabled = true;
   }
 
@@ -322,8 +322,11 @@ function toggleDropdown(id, newid) {
 function completeOrder() {
   document.getElementById("credentials").style = "display: none";
   document.getElementById("orderComplete").style = "display: initial";
+  document.getElementById("cartCard").disabled = true;
   for (let i = 0; i < cartItems.length; i++) {
     orderCompleteElements[i] = document.createElement('p');
+    orderCompleteElements[i].classList = "confirm-item list-group-item mgt5";
+    orderCompleteElements[i].style = "border-top-width: 2px";
     orderCompleteElements[i].innerHTML = "x" + cartAmounts[i].innerHTML + " " + cartItems[i].name;
     document.getElementById("orderCompleteCard").appendChild(orderCompleteElements[i]);
   }

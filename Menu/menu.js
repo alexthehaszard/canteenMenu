@@ -35,7 +35,7 @@ let menu = {
       sandwiches: {
         name: "Sandwiches",
         price: "4"
-      }
+      },
     },
 
     lunch: {
