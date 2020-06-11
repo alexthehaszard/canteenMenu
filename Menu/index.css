@@ -56,12 +56,12 @@
 }
 
 .checkout-item {
- padding-right: 30%;
+ padding-right: 40%;
 }
 
 .add-item {
   position: absolute;
-  font-size: 0.5rem;
+  font-size: 0.8rem;
   padding: 5px;
   right: 5px;
   top: 50%;
@@ -71,9 +71,9 @@
 
 .remove-item {
   position: absolute;
-  font-size: 0.5rem;
-  padding: 5px;
-  right: 40px;
+  font-size: 0.8rem;
+  padding: 5px 7px 5px 7px;
+  right: 45px;
   top: 50%;
   transform: translateY(-50%);
   text-align: center;
@@ -82,14 +82,14 @@
 .item-count {
   position: absolute;
   font-size: 1rem;
-  right: 1.7rem;
+  right: 2rem;
   top: 50%;
   transform: translateY(-50%);
 }
 
 .list-price {
   position: absolute;
-  right: 4rem;
+  right: 4.5rem;
   top: 50%;
   transform: translateY(-50%);
 }

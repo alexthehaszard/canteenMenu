@@ -80,6 +80,10 @@ function showMenu() {
       menuButtons[i].innerHTML = "Add to Cart";
       menuButtons[i].classList = "btn btn-success add-to-cart button-colour";
       menuButtons[i].setAttribute("onclick", "addItemToCart(menuItems[" + i + "])");
+      //disable the button if the item is already in cart.
+      if (cartItems.includes(menuItems[i])) {
+        menuButtons[i].disabled = true;
+      }
       menuCards[i].appendChild(menuButtons[i]);
     }
   } else {
@@ -114,22 +118,26 @@ function showMenu() {
     menuButtons[0].innerHTML = "Add to Cart";
     menuButtons[0].classList = "btn btn-success add-to-cart button-colour";
     menuButtons[0].setAttribute("onclick", "addItemToCart(menuItems[" + day + "])");
+    //disable the button if the item is already in the cart
+    if (cartItems.includes(menuItems[0])) {
+      menuButtons[0].disabled = true;
+    }
     menuCards[0].appendChild(menuButtons[0]);
   }
 }
 
 function addItemToCart(item) {
-  if (cartItems.includes(item) === true) {
-    alert("Item is already in cart!");
-  }
   //if there is less than 3 morning tea items or less than 1 lunch items
-  else if ((morningTeaItems < maxMorningTea && time === "morning") || (lunchItems < maxLunch && time === "lunch")) {
+  if ((morningTeaItems < maxMorningTea && time === "morning") || (lunchItems < maxLunch && time === "lunch")) {
     //keep track of how many lunch/morning tea items you have
     if (time === "morning") {
       morningTeaItems++;
     } else {
       lunchItems++;
     }
+
+    //disable the button for that item.
+    menuButtons[menuItems.indexOf(item)].disabled = true;
 
     //show the card for the cart
     document.getElementById("checkoutItems").style = "display: flex";
