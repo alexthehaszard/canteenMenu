@@ -6,8 +6,8 @@ let morningTeaItems = 0;
 let lunchItems = 0;
 
 //arrays for the items in the lunch menu
-let lunchContents1 = Object.values(menu.content.lunch.week1);
-let lunchContents2 = Object.values(menu.content.lunch.week2);
+let lunchWeek1 = Object.values(menu.content.lunch.week1);
+let lunchWeek2 = Object.values(menu.content.lunch.week2);
 
 //the cart items, their name elements and their price elements. all in lists.
 let cartItems = [];
@@ -71,7 +71,7 @@ function showMenu() {
 
       //this creates the prices
       menuPrices[i] = document.createElement("p");
-      menuPrices[i].innerHTML = "Price: $" + menuItems[i].price;
+      menuPrices[i].innerHTML = `Price: $${menuItems[i].price}`;
       menuPrices[i].classList = "price-text";
       menuCards[i].appendChild(menuPrices[i]);
 
@@ -79,7 +79,7 @@ function showMenu() {
       menuButtons[i] = document.createElement("button");
       menuButtons[i].innerHTML = "Add to Cart";
       menuButtons[i].classList = "btn btn-success add-to-cart button-colour";
-      menuButtons[i].setAttribute("onclick", "addItemToCart(menuItems[" + i + "])");
+      menuButtons[i].setAttribute("onclick", `addItemToCart(menuItems[${i}])`);
       //disable the button if the item is already in cart.
       if (cartItems.includes(menuItems[i])) {
         menuButtons[i].disabled = true;
@@ -109,7 +109,7 @@ function showMenu() {
 
     //creates the prices for the lunch item
     menuPrices[0] = document.createElement("p");
-    menuPrices[0].innerHTML = "Price: $" + menuItems[day].price;
+    menuPrices[0].innerHTML = `Price: $${menuItems[day].price}`;
     menuPrices[0].classList = "price-text";
     menuCards[0].appendChild(menuPrices[0]);
 
@@ -117,7 +117,7 @@ function showMenu() {
     menuButtons[0] = document.createElement("button");
     menuButtons[0].innerHTML = "Add to Cart";
     menuButtons[0].classList = "btn btn-success add-to-cart button-colour";
-    menuButtons[0].setAttribute("onclick", "addItemToCart(menuItems[" + day + "])");
+    menuButtons[0].setAttribute("onclick", `addItemToCart(menuItems[${day}])`);
     //disable the button if the item is already in the cart
     if (cartItems.includes(menuItems[0])) {
       menuButtons[0].disabled = true;
@@ -166,17 +166,17 @@ function addItemToCart(item) {
     cartItemsRemoveButtons.push(document.createElement("button"));
     cartItemsRemoveButtons[cartItemsRemoveButtons.length - 1].classList ="btn btn-warning remove-item";
     cartItemsRemoveButtons[cartItemsRemoveButtons.length - 1].innerHTML = "-";
-    cartItemsRemoveButtons[cartItemsRemoveButtons.length - 1].setAttribute("onclick", "removeItem(" + (cartItemsRemoveButtons.length - 1) + ")");
+    cartItemsRemoveButtons[cartItemsRemoveButtons.length - 1].setAttribute("onclick", `removeItem(${cartItemsRemoveButtons.length - 1})`);
     cartItemsToShow[cartItemsToShow.length - 1].appendChild(cartItemsRemoveButtons[cartItemsRemoveButtons.length - 1]);
 
     //add the add item button
     cartItemsAddButtons.push(document.createElement("button"));
     cartItemsAddButtons[cartItemsAddButtons.length - 1].classList = "btn btn-warning add-item";
     cartItemsAddButtons[cartItemsAddButtons.length - 1].innerHTML = "+";
-    cartItemsAddButtons[cartItemsAddButtons.length - 1].setAttribute("onclick", "addItem(" + (cartItemsAddButtons.length - 1) + ")");
+    cartItemsAddButtons[cartItemsAddButtons.length - 1].setAttribute("onclick", `addItem(${cartItemsAddButtons.length - 1})`);
     cartItemsToShow[cartItemsToShow.length - 1].appendChild(cartItemsAddButtons[cartItemsAddButtons.length - 1]);
 
-    if (lunchContents1.includes(item) || lunchContents2.includes(item)) {
+    if (lunchWeek1.includes(item) || lunchWeek2.includes(item)) {
       cartItemsAddButtons[cartItemsAddButtons.length - 1].disabled = true;
     }
 
@@ -187,7 +187,7 @@ function addItemToCart(item) {
     cartItemsToShow[cartItemsToShow.length - 1].appendChild(cartAmounts[cartAmounts.length - 1]);
 
     //make the total price update
-    document.getElementById("totalPrice").innerHTML = "Total: $" + totalPrice;
+    document.getElementById("totalPrice").innerHTML = `Total: $${totalPrice}`;
   } else {
     //make sure there is not too many items going in the cart.
     if (time === "morning") {
@@ -202,7 +202,6 @@ function goToCart() {
   if (screen === 0) {
     //move to the cart screen
     document.getElementById("content").style = "transform: translateX(-100%)";
-    // document.getElementById("html").style = "overflow-y: hidden";
     screen = 1;
     //after 500ms, remove the screen that is not being looked at.
     setTimeout(function(){
@@ -240,13 +239,13 @@ function removeItem(index) {
 
     //update the total price
     totalPrice -= cartItems[index].price;
-    document.getElementById("totalPrice").innerHTML = "Total: $" + totalPrice;
+    document.getElementById("totalPrice").innerHTML = `Total: $${totalPrice}`;
   }
   //if there is only one, then remove the card.
   else {
     if (confirm("Are you sure you want to remove this item from the cart?")) {
       //if it is a lunch item, remove that item from the lunch total, else remove it from the morning tea items.
-			if (lunchContents1.includes(cartItems[index]) || lunchContents1.includes(cartItems[index])) {
+			if (lunchWeek1.includes(cartItems[index]) || lunchWeek1.includes(cartItems[index])) {
 				lunchItems--;
 			} else {
 				morningTeaItems--;
@@ -254,7 +253,7 @@ function removeItem(index) {
 
       //update the total price
       totalPrice -= cartItems[index].price;
-      document.getElementById("totalPrice").innerHTML = "Total: $" + totalPrice;
+      document.getElementById("totalPrice").innerHTML = `Total: $${totalPrice}`;
 
       //remove the card of the item being removed
       cartItemsToShow[index].parentNode.removeChild(cartItemsToShow[index]);
@@ -272,8 +271,8 @@ function removeItem(index) {
 
       //make all of the other remove button onclick events update, as the old values won't work anymore
       for (let i = 0; i < cartItemsRemoveButtons.length; i++) {
-        cartItemsRemoveButtons[i].setAttribute("onclick", "removeItem(" + i + ")");
-        cartItemsAddButtons[i].setAttribute("onclick", "addItem(" + i + ")");
+        cartItemsRemoveButtons[i].setAttribute("onclick", `removeItem(${i})`);
+        cartItemsAddButtons[i].setAttribute("onclick", `addItem(${i})`);
       }
 
       //if there are no items in the cart, hide the total and the items cards
@@ -296,7 +295,7 @@ function addItem(index) {
 
   //update the total price
   totalPrice += parseInt(cartItems[index].price);
-  document.getElementById("totalPrice").innerHTML = "Total: $" + totalPrice;
+  document.getElementById("totalPrice").innerHTML = `Total: $${totalPrice}`;
 }
 
 function changeMenu(timeSelected) {
@@ -335,7 +334,7 @@ function completeOrder() {
     orderCompleteElements[i] = document.createElement('p');
     orderCompleteElements[i].classList = "confirm-item list-group-item mgt5";
     orderCompleteElements[i].style = "border-top-width: 2px";
-    orderCompleteElements[i].innerHTML = "x" + cartAmounts[i].innerHTML + " " + cartItems[i].name;
+    orderCompleteElements[i].innerHTML = `x${cartAmounts[i].innerHTML} ${cartItems[i].name}`;
     document.getElementById("orderCompleteCard").appendChild(orderCompleteElements[i]);
   }
 }
