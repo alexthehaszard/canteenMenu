@@ -129,15 +129,14 @@ function showMenu() {
 function addItemToCart(item) {
   //if there is less than 3 morning tea items or less than 1 lunch items
   if ((morningTeaItems < maxMorningTea && time === "morning") || (lunchItems < maxLunch && time === "lunch")) {
-    //keep track of how many lunch/morning tea items you have
+    //keep track of how many lunch/morning tea items you have and disable the button
     if (time === "morning") {
       morningTeaItems++;
+      menuButtons[menuItems.indexOf(item)].disabled = true;
     } else {
       lunchItems++;
+      menuButtons[0].disabled = true;
     }
-
-    //disable the button for that item.
-    menuButtons[menuItems.indexOf(item)].disabled = true;
 
     //show the card for the cart
     document.getElementById("checkoutItems").style = "display: flex";
