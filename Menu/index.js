@@ -190,7 +190,7 @@ function addItemToCart(item) {
   } else {
     //make sure there is not too many items going in the cart.
     if (time === "morning") {
-      alert("You can have a maximum of 3 items at morning tea.");
+      alert("You can have a maximum of 3 different items at morning tea.");
     } else {
       alert("You can only have 1 lunch item.");
     }
@@ -244,7 +244,7 @@ function removeItem(index) {
   else {
     if (confirm("Are you sure you want to remove this item from the cart?")) {
       //if it is a lunch item, remove that item from the lunch total, else remove it from the morning tea items.
-			if (lunchWeek1.includes(cartItems[index]) || lunchWeek1.includes(cartItems[index])) {
+			if (lunchWeek1.includes(cartItems[index]) || lunchWeek2.includes(cartItems[index])) {
 				lunchItems--;
 			} else {
 				morningTeaItems--;
@@ -314,12 +314,21 @@ function updateLunches(wk, dy) {
 
 //opens and changes the dropdown menu for changing the day.
 function toggleDropdown(id, newid) {
-  if (newid === null) {
+  if (newid === "dropdownWeeks" && dropdownOpen === true) {
+    console.log('pog');
+    document.getElementById("dropdownItems").style = "display: none";
+    dropdownOpen = false;
+  }
+  else if (newid === null) {
     document.getElementById(id).style = "display: none";
+    document.getElementById("dropdownItems").style = "display: none";
+    dropdownOpen = false;
   } else {
     if (id !== null) {
       document.getElementById(id).style = "display: none";
     }
+    dropdownOpen = true;
+    document.getElementById("dropdownItems").style = "display: initial";
     document.getElementById(newid).style = "display: initial";
   }
 }
