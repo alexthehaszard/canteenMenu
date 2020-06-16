@@ -1,79 +1,80 @@
 <!DOCTYPE html>
 <html id="html">
-  <head>
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous"/>
-    <link rel="stylesheet" href="index.css" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <script src="menu.js"></script>
-    <script defer src="index.js"></script>
-    <title>Bayfield Canteen Menu</title>
-  </head>
+<head>
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous"/>
+  <link rel="stylesheet" href="index.css" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <script src="menu.js"></script>
+  <script defer src="index.js"></script>
+  <title>Bayfield Canteen Menu</title>
+</head>
 
-  <body id="body">
+<body id="body">
 
-    <!-- set up the navigation bar -->
-    <nav id="navBar">
-      <img id="logo" src="https://upload.wikimedia.org/wikipedia/en/7/73/Bayfield_High_School_Crest.png"/>
-      <p id="title" class="">Bayfield High School Canteen</p>
-      <button id="cartCard" class="btn btn-success button-colour" onclick="goToCart()">
-        <img id="cart" src="images/cart-line.png" />
-        <p id="cartNumber">0</p>
-      </button>
-    </nav>
-    <!-- this holds all of the content that will be displayed under the navigation bar -->
-    <div id="content">
-      <!-- this is for the first screen, the menu -->
-      <div id="menu">
-		    <!-- this is to show the buttons to change the menu -->
-		    <div id="menuNavigation" class="input-group">
+  <!-- set up the navigation bar -->
+  <nav id="navBar">
+    <img id="logo" src="https://upload.wikimedia.org/wikipedia/en/7/73/Bayfield_High_School_Crest.png"/>
+    <p id="title" class="">Bayfield High School Canteen</p>
+    <button id="cartCard" class="btn btn-success button-colour" onclick="goToCart()">
+      <img id="cart" src="images/cart-line.png" />
+      <p id="cartNumber">0</p>
+    </button>
+  </nav>
+  <!-- this holds all of the content that will be displayed under the navigation bar -->
+  <div id="content">
+    <!-- this is for the first screen, the menu -->
+    <div id="menu">
+		  <!-- this is to show the buttons to change the menu -->
+		  <div id="menuNavigation" class="input-group">
 		    <button id="morning" class="btn btn-success menu-nav-button" onclick="changeMenu('morning')" disabled>Morning Tea</button>
 		    <button id="lunch" class="btn btn-success menu-nav-button" onclick="changeMenu('lunch')">Lunch</button>
-          <div id="dropdownMenu" class="dropdown">
-            <button id="toggleDropdown" class="dropdown-toggle btn btn-secondary menu-nav-button" onclick="toggleDropdown(null, 'dropdownWeeks')">Day </button>
-            <div id="dropdownItems">
-              <div id="dropdownWeeks" class="dropdown-menu dropdown-menu-right">
-                <button class="dropdown-item" onclick="updateLunches(1, day); toggleDropdown('dropdownWeeks', 'dropdownDays')">Week 1</button>
-                <button class="dropdown-item" onclick="updateLunches(2, day); toggleDropdown('dropdownWeeks', 'dropdownDays')">Week 2</button>
-              </div>
-              <div id="dropdownDays" class="dropdown-menu dropdown-menu-right">
-                <button class="dropdown-item" onclick="updateLunches(week, 0); toggleDropdown('dropdownDays', null)">Monday</button>
-                <button class="dropdown-item" onclick="updateLunches(week, 1); toggleDropdown('dropdownDays', null)">Tuesday</button>
-                <button class="dropdown-item" onclick="updateLunches(week, 2); toggleDropdown('dropdownDays', null)">Wednesday</button>
-                <button class="dropdown-item" onclick="updateLunches(week, 3); toggleDropdown('dropdownDays', null)">Thursday</button>
-                <button class="dropdown-item" onclick="updateLunches(week, 4); toggleDropdown('dropdownDays', null)">Friday</button>
-              </div>
+        <div id="dropdownMenu" class="dropdown">
+          <button id="toggleDropdown" class="dropdown-toggle btn btn-secondary menu-nav-button" onclick="toggleDropdown(null, 'dropdownWeeks')">Day </button>
+          <div id="dropdownItems">
+            <div id="dropdownWeeks" class="dropdown-menu dropdown-menu-right">
+              <button class="dropdown-item" onclick="updateLunches(1, day); toggleDropdown('dropdownWeeks', 'dropdownDays')">Week 1</button>
+              <button class="dropdown-item" onclick="updateLunches(2, day); toggleDropdown('dropdownWeeks', 'dropdownDays')">Week 2</button>
+            </div>
+            <div id="dropdownDays" class="dropdown-menu dropdown-menu-right">
+              <button class="dropdown-item" onclick="updateLunches(week, 0); toggleDropdown('dropdownDays', null)">Monday</button>
+              <button class="dropdown-item" onclick="updateLunches(week, 1); toggleDropdown('dropdownDays', null)">Tuesday</button>
+              <button class="dropdown-item" onclick="updateLunches(week, 2); toggleDropdown('dropdownDays', null)">Wednesday</button>
+              <button class="dropdown-item" onclick="updateLunches(week, 3); toggleDropdown('dropdownDays', null)">Thursday</button>
+              <button class="dropdown-item" onclick="updateLunches(week, 4); toggleDropdown('dropdownDays', null)">Friday</button>
             </div>
           </div>
-	      </div>
-        <div id="header"></div>
-        <div id="menuItems"></div>
+        </div>
+	    </div>
+      <div id="header"></div>
+      <div id="menuItems"></div>
+    </div>
+    <!-- this is for the second screen, the checkout/cart -->
+    <div id="checkout">
+      <button id="backArrow" class="btn btn-success button-colour" onclick="goToCart()"><</button>
+      <p id="checkoutHeader" class="headers">Cart</p>
+      <div id="checkoutItems" class="card" style="display: none;">
+        <ul id="checkoutList" class="list-group list-group-flush"></ul>
       </div>
-      <!-- this is for the second screen, the checkout/cart -->
-      <div id="checkout">
-        <button id="backArrow" class="btn btn-success button-colour" onclick="goToCart()"><</button>
-        <p id="checkoutHeader" class="headers">Cart</p>
-        <div id="checkoutItems" class="card" style="display: none;">
-          <ul id="checkoutList" class="list-group list-group-flush"></ul>
+      <div id="total" class="card" style="display: none">
+        <p id="totalPrice"></p>
+        <button id="buyButton" class="btn btn-success button-colour" onclick="toggleCredentialScreen()">Checkout</button>
+      </div>
+      <div id="credentials" style="display: none;">
+        <div id="inputCredentials" class="card border-secondary mb-3">
+          <button id="closeCredentials" class="btn btn-danger" onclick="toggleCredentialScreen()">X</button>
+          <input placeholder="Full Name" id="inputName" class="inputs" type="text" />
+          <input placeholder="Tutor Group" id="inputTutorGroup" class="inputs mgt5" type="text" maxlength="3" />
+          <!-- found a fix for maxlength using number on https://stackoverflow.com/questions/18510845/maxlength-ignored-for-input-type-number-in-chrome -->
+          <input placeholder="Student ID" id="inputStudentID" class="inputs mgt5" type="tel" maxlength="5" />
+          <button id="buyButton" class="btn btn-success mgt10 button-colour" onclick="completeOrder('orderCompleteCard')">Place Order</button>
         </div>
-        <div id="total" class="card" style="display: none">
-          <p id="totalPrice"></p>
-          <button id="buyButton" class="btn btn-success button-colour" onclick="toggleCredentialScreen()">Checkout</button>
-        </div>
-        <div id="credentials" style="display: none;">
-          <div id="inputCredentials" class="card border-secondary mb-3">
-            <button id="closeCredentials" class="btn btn-danger" onclick="toggleCredentialScreen()">X</button>
-            <input placeholder="Full Name" id="inputName" class="inputs" type="text" />
-            <input placeholder="Tutor Group" id="inputTutorGroup" class="inputs mgt5" type="text" maxlength="3" />
-            <input placeholder="Student ID" id="inputStudentID" class="inputs mgt5" type="number" oninput="if (this.value.length > 5) this.value = this.value.slice(0,5)" />
-            <button id="buyButton" class="btn btn-success mgt10 button-colour" onclick="completeOrder('orderCompleteCard')">Place Order</button>
-          </div>
-        </div>
-        <div id="orderComplete">
-          <div id="orderCompleteCard" class="card" style="justify-content: center">
-            <p class="card-header">Order complete!<br />You ordered:</p>
-          </div>
+      </div>
+      <div id="orderComplete">
+        <div id="orderCompleteCard" class="card" style="justify-content: center">
+          <p class="card-header">Order complete!<br />You ordered:</p>
         </div>
       </div>
     </div>
-  </body>
+  </div>
+</body>
 </html>
