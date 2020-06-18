@@ -22,6 +22,7 @@ let menuCards = [];
 let menuNames = [];
 let menuPrices = [];
 let menuButtons = [];
+let menuTitle;
 
 //order complete list of elements.
 let orderCompleteElements = [];
@@ -52,9 +53,10 @@ let maxLunch = 1;
 function showMenu() {
   menuDiv.innerHTML = "";
   if (time === "morning" && screen !== 1) {
-	//display the morning tea menu
-	//get the morning tea options from the object
+		//display the morning tea menu
+		//get the morning tea options from the object
     menuItems = Object.values(menu.content.morningTea);
+		document.getElementById("header").innerHTML = "";
 
     for (let i = 0; i < menuItems.length; i++) {
       //add each item from the menu object into their cards and onto the screen
@@ -89,12 +91,20 @@ function showMenu() {
   } else {
     //display the lunch menu
     //display the current week's lunch menu
+		
     if (week === 1) {
       menuItems = Object.values(menu.content.lunch.week1);
     }
     if (week === 2) {
       menuItems = Object.values(menu.content.lunch.week2);
     }
+		
+		//create the title for the lunch menu
+		document.getElementById("header").innerHTML = "";
+		menuTitle = document.createElement("p");
+		menuTitle.style = "position: relative; margin-top: 10px; text-align: center; font-weight: bold";
+		menuTitle.innerHTML = `${menuItems[day].day} Week ${week}`
+		document.getElementById("header").appendChild(menuTitle);
     
     //creates the card for the lunch item
     menuCards[0] = document.createElement("div");
@@ -315,7 +325,6 @@ function updateLunches(wk, dy) {
 //opens and changes the dropdown menu for changing the day.
 function toggleDropdown(id, newid) {
   if (newid === "dropdownWeeks" && dropdownOpen === true) {
-    console.log('pog');
     document.getElementById("dropdownItems").style = "display: none";
     dropdownOpen = false;
   }
@@ -335,14 +344,18 @@ function toggleDropdown(id, newid) {
 
 //opens the completed order screen.
 function completeOrder() {
-  document.getElementById("credentials").style = "display: none";
-  document.getElementById("orderComplete").style = "display: initial";
-  document.getElementById("cartCard").disabled = true;
-  for (let i = 0; i < cartItems.length; i++) {
-    orderCompleteElements[i] = document.createElement('p');
-    orderCompleteElements[i].classList = "confirm-item list-group-item mgt5";
-    orderCompleteElements[i].style = "border-top-width: 2px";
-    orderCompleteElements[i].innerHTML = `x${cartAmounts[i].innerHTML} ${cartItems[i].name}`;
-    document.getElementById("orderCompleteCard").appendChild(orderCompleteElements[i]);
+  if (document.getElementById('inputName').value === "" || document.getElementById('inputStudentID').value === "" || document.getElementById('inputTutorGroup').value === "") {
+    alert("fill out the fields!");
+  } else {
+    document.getElementById("credentials").style = "display: none";
+    document.getElementById("orderComplete").style = "display: initial";
+    document.getElementById("cartCard").disabled = true;
+    for (let i = 0; i < cartItems.length; i++) {
+      orderCompleteElements[i] = document.createElement('p');
+      orderCompleteElements[i].classList = "confirm-item list-group-item mgt5";
+      orderCompleteElements[i].style = "border-top-width: 2px";
+      orderCompleteElements[i].innerHTML = `x${cartAmounts[i].innerHTML} ${cartItems[i].name}`;
+      document.getElementById("orderCompleteCard").appendChild(orderCompleteElements[i]);
+    }
   }
 }

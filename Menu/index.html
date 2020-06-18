@@ -14,7 +14,7 @@
   <!-- set up the navigation bar -->
   <nav id="navBar">
     <img id="logo" src="https://upload.wikimedia.org/wikipedia/en/7/73/Bayfield_High_School_Crest.png"/>
-    <p id="title" class="">Bayfield High School Canteen</p>
+    <p id="title" class="title">Bayfield High School Canteen</p>
     <button id="cartCard" class="btn btn-success button-colour" onclick="goToCart()">
       <img id="cart" src="images/cart-line.png" />
       <p id="cartNumber">0</p>
@@ -65,13 +65,13 @@
           <input placeholder="Full Name" id="inputName" class="inputs" type="text" />
           <input placeholder="Tutor Group" id="inputTutorGroup" class="inputs mgt5" type="text" maxlength="3" />
           <!-- found a fix for maxlength using number on https://stackoverflow.com/questions/18510845/maxlength-ignored-for-input-type-number-in-chrome -->
-          <input placeholder="Student ID" id="inputStudentID" class="inputs mgt5" type="tel" maxlength="5" />
+          <input placeholder="Student ID" id="inputStudentID" class="inputs mgt5" type="number" onkeydown="if (this.value.length == 5 && event.keyCode != 8) return false;" />
           <button id="buyButton" class="btn btn-success mgt10 button-colour" onclick="completeOrder('orderCompleteCard')">Place Order</button>
         </div>
       </div>
       <div id="orderComplete">
         <div id="orderCompleteCard" class="card" style="justify-content: center">
-          <p class="card-header">Order complete!<br />You ordered:</p>
+          <p class="card-header">Order complete!<br>You ordered:</p>
         </div>
       </div>
     </div>

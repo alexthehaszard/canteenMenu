@@ -3,6 +3,16 @@
   top: 50%;
 }
 
+.title {
+  position: absolute;
+  color: white;
+  font-size: min(5vw, 2.5rem);
+  left: 50%;
+  top: 50%;
+  text-align: center;
+  transform: translate(-50%, -50%);
+}
+
 .price-text {
   text-align: center;
 }
@@ -165,16 +175,6 @@ body {
   left: 5vw;
   top: 50%;
   height: min(10vw, 6rem);
-}
-
-#title {
-  position: absolute;
-  color: white;
-  font-size: min(5vw, 2.5rem);
-  left: 50%;
-  top: 50%;
-  text-align: center;
-  transform: translate(-50%, -50%);
 }
 
 #cart {

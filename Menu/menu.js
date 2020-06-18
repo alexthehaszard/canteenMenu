@@ -47,55 +47,65 @@ let menu = {
       week1: {
         monday: {
           name: "Chicken Nuggets with Oven Baked Chips",
-          price: 5
+          price: 5,
+					day: "Monday"
         },
 
         tuesday: {
           name: "Pumpkin and Feta Bake",
-          price: 5
+          price: 5,
+					day: "Tuesday"
         },
 
         wednesday: {
           name: "Macaroni and Cheese",
-          price: 5
+          price: 5,
+					day: "Wednesday"
         },
 
         thursday: {
           name: "Butter Chicken on Rice",
-          price: 5
+          price: 5,
+					day: "Thursday"
         },
 
         friday: {
           name: "Fried Rice",
-          price: 5
+          price: 5,
+					day: "Friday"
         }
       },
 
       week2: {
         monday: {
           name: "Chicken Nuggets with Oven Baked Chips",
-          price: 5
+          price: 5,
+					day: "Monday"
         },
 
         tuesday: {
           name: "Bacon, Egg, Potato and Spinach Pie",
-          price: 5
+          price: 5,
+					day: "Tuesday"
         },
 
         wednesday: {
           name: "Lasagne",
-          price: 5
+          price: 5,
+					day: "Wednesday"
         },
 
         thursday: {
           name: "Meatballs on Tomato Sauce with Rice",
-          price: 5
+          price: 5,
+					day: "Thursday"
         },
 
         friday: {
           name: "Chicken or Beef Burgers with Tomato Relish and Cheese",
-          price: 5
-        }
+          price: 5,
+					day: "Friday"
+				}
       }
     }
   }
