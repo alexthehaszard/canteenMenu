@@ -40,9 +40,10 @@ let menuItems;
 let totalPrice = 0;
 
 //these are used to tell what should be on the menu
-let week = 1;
-let day = 0;
-let time = "morning";
+let week = 1; // week 1
+let day = 0; // monday
+let time = "morning"; // time is morning
+// show the week 1, monday, morning menu
 showMenu();
 
 //the max amount of a certain
@@ -136,6 +137,7 @@ function showMenu() {
   }
 }
 
+//adds an item to the cart.
 function addItemToCart(item) {
   //if there is less than 3 morning tea items or less than 1 lunch items
   if ((morningTeaItems < maxMorningTea && time === "morning") || (lunchItems < maxLunch && time === "lunch")) {
@@ -207,6 +209,7 @@ function addItemToCart(item) {
   }
 }
 
+//switches from the cart screen to the menu screen and vice versa
 function goToCart() {
   if (screen === 0) {
     //move to the cart screen
@@ -225,7 +228,6 @@ function goToCart() {
   }
 }
 
-
 //opens the place order screen
 function toggleCredentialScreen() {
   if (screen !== 2) {
@@ -237,7 +239,8 @@ function toggleCredentialScreen() {
   }
 }
 
-function removeItem(index) {
+//removes an item from the cart
+function removeItem(index, bypass) {
   //remove one from the item's total, if there is more than one
   if (cartAmounts[index].innerHTML > 1) {
     //re-enable the cart button, if it is disabled
@@ -252,7 +255,7 @@ function removeItem(index) {
   }
   //if there is only one, then remove the card.
   else {
-    if (confirm("Are you sure you want to remove this item from the cart?")) {
+    if (bypass === 1 || confirm("Are you sure you want to remove this item from the cart?")) {
       //if it is a lunch item, remove that item from the lunch total, else remove it from the morning tea items.
 			if (lunchWeek1.includes(cartItems[index]) || lunchWeek2.includes(cartItems[index])) {
 				lunchItems--;
@@ -293,6 +296,7 @@ function removeItem(index) {
   }
 }
 
+//adds an item to the cart
 function addItem(index) {
   //if there is 3, then disable the button
   if (cartAmounts[index].innerHTML === '2') {
@@ -307,6 +311,7 @@ function addItem(index) {
   document.getElementById("totalPrice").innerHTML = `Total: $${totalPrice}`;
 }
 
+//changes the menu to lunch or morning tea
 function changeMenu(timeSelected) {
 	//this function changes the menu from morning tea to lunch and vice versa
   document.getElementById(time).disabled = false;
@@ -347,15 +352,42 @@ function completeOrder() {
   if (document.getElementById('inputName').value === "" || document.getElementById('inputStudentID').value === "" || document.getElementById('inputTutorGroup').value === "") {
     alert("fill out the fields!");
   } else {
-    document.getElementById("credentials").style = "display: none";
-    document.getElementById("orderComplete").style = "display: initial";
-    document.getElementById("cartCard").disabled = true;
-    for (let i = 0; i < cartItems.length; i++) {
-      orderCompleteElements[i] = document.createElement('p');
-      orderCompleteElements[i].classList = "confirm-item list-group-item mgt5";
-      orderCompleteElements[i].style = "border-top-width: 2px";
-      orderCompleteElements[i].innerHTML = `x${cartAmounts[i].innerHTML} ${cartItems[i].name}`;
-      document.getElementById("orderCompleteCard").appendChild(orderCompleteElements[i]);
-    }
+    if (document.getElementById("completeItems").innerHTML === "") { 
+      //when the order complete screen is opened
+      //hide the credentials screen
+      document.getElementById("credentials").style = "display: none";
+      //show the order complete screen
+      document.getElementById("orderComplete").style = "display: initial";
+      //disable the cart button
+      document.getElementById("cartCard").disabled = true;
+      //add all of the cart items to the order complete screen
+			for (let i = 0; i < cartItems.length; i++) {
+				orderCompleteElements[i] = document.createElement('p');
+				orderCompleteElements[i].classList = "confirm-item list-group-item mgt5";
+				orderCompleteElements[i].style = "border-top-width: 2px";
+				orderCompleteElements[i].innerHTML = `x${cartAmounts[i].innerHTML} ${cartItems[i].name}`;
+				document.getElementById("completeItems").appendChild(orderCompleteElements[i]);
+			}
+    } else {
+      //when the order completed screen is closed
+      //hide the order completed screen
+      document.getElementById("orderComplete").style = "display: none";
+      //go to the main menu
+      screen = 1;
+      goToCart();
+      //remove the items from inside the order complete screen
+      document.getElementById("completeItems").innerHTML = "";
+      //re-enable the cart buitton
+      document.getElementById("cartCard").disabled = false;
+      //remove all of the items from the cart.
+			let num = cartItems.length;
+			for(let i = 0; i < num; i++) {
+				while (cartAmounts[0] && cartAmounts[0].innerHTML >= 1) {
+					removeItem(0, 1);
+				}
+      }
+      //update the menu so that the buttons are all enabled.
+      showMenu();
+		}
   }
 }
