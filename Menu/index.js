@@ -54,87 +54,59 @@ let maxLunch = 1;
 function showMenu() {
   menuDiv.innerHTML = "";
   if (time === "morning" && screen !== 1) {
-		//display the morning tea menu
-		//get the morning tea options from the object
+    //display the morning tea menu
+    //get the morning tea options from the object
     menuItems = Object.values(menu.content.morningTea);
-		document.getElementById("header").innerHTML = "";
+    document.getElementById("header").innerHTML = "";
 
     for (let i = 0; i < menuItems.length; i++) {
-      //add each item from the menu object into their cards and onto the screen
-      //this creates the cards
-      menuCards[i] = document.createElement("div");
-      menuCards[i].classList = "card mb-3 menu-cards";
-      menuDiv.appendChild(menuCards[i]);
-
-      //this creates the names
-      menuNames[i] = document.createElement("p");
-      menuNames[i].innerHTML = menuItems[i].name;
-      menuNames[i].classList = "item-name card-header";
-      menuCards[i].appendChild(menuNames[i]);
-
-      //this creates the prices
-      menuPrices[i] = document.createElement("p");
-      menuPrices[i].innerHTML = `Price: $${menuItems[i].price}`;
-      menuPrices[i].classList = "price-text";
-      menuCards[i].appendChild(menuPrices[i]);
-
-      //this creates the buttons
-      menuButtons[i] = document.createElement("button");
-      menuButtons[i].innerHTML = "Add to Cart";
-      menuButtons[i].classList = "btn btn-success add-to-cart button-colour";
-      menuButtons[i].setAttribute("onclick", `addItemToCart(menuItems[${i}])`);
-      //disable the button if the item is already in cart.
-      if (cartItems.includes(menuItems[i])) {
-        menuButtons[i].disabled = true;
-      }
-      menuCards[i].appendChild(menuButtons[i]);
+      createMenuCard(i, "menu-cards");
     }
   } else {
     //display the lunch menu
     //display the current week's lunch menu
-		
+
     if (week === 1) {
       menuItems = Object.values(menu.content.lunch.week1);
     }
     if (week === 2) {
       menuItems = Object.values(menu.content.lunch.week2);
     }
-		
-		//create the title for the lunch menu
-		document.getElementById("header").innerHTML = "";
-		menuTitle = document.createElement("p");
-		menuTitle.style = "position: relative; margin-top: 10px; text-align: center; font-weight: bold";
-		menuTitle.innerHTML = `${menuItems[day].day} Week ${week}`
-		document.getElementById("header").appendChild(menuTitle);
-    
-    //creates the card for the lunch item
-    menuCards[0] = document.createElement("div");
-    menuCards[0].classList = "card mb-3 lunch-cards";
-    menuDiv.appendChild(menuCards[0]);
 
-    //creates the name for the lunch item
-    menuNames[0] = document.createElement("p");
-    menuNames[0].innerHTML = menuItems[day].name;
-    menuNames[0].classList = "item-name card-header";
-    menuCards[0].appendChild(menuNames[0]);
-
-    //creates the prices for the lunch item
-    menuPrices[0] = document.createElement("p");
-    menuPrices[0].innerHTML = `Price: $${menuItems[day].price}`;
-    menuPrices[0].classList = "price-text";
-    menuCards[0].appendChild(menuPrices[0]);
-
-    //creates the add to cart button for the lunch item
-    menuButtons[0] = document.createElement("button");
-    menuButtons[0].innerHTML = "Add to Cart";
-    menuButtons[0].classList = "btn btn-success add-to-cart button-colour";
-    menuButtons[0].setAttribute("onclick", `addItemToCart(menuItems[${day}])`);
-    //disable the button if the item is already in the cart
-    if (cartItems.includes(menuItems[0])) {
-      menuButtons[0].disabled = true;
-    }
-    menuCards[0].appendChild(menuButtons[0]);
+    //create the title for the lunch menu
+    document.getElementById("header").innerHTML = "";
+    createMenuCard(0, "lunch-cards");
   }
+}
+
+// this is used to create the cards in the menu for lunch and morning tea
+function createMenuCard(i, itemClass) {
+  menuCards[i] = document.createElement("div");
+  menuCards[i].classList = "card mb-3 " + itemClass;
+  menuDiv.appendChild(menuCards[i]);
+
+  //this creates the names
+  menuNames[i] = document.createElement("p");
+  menuNames[i].innerHTML = menuItems[i].name;
+  menuNames[i].classList = "item-name card-header";
+  menuCards[i].appendChild(menuNames[i]);
+
+  //this creates the prices
+  menuPrices[i] = document.createElement("p");
+  menuPrices[i].innerHTML = `Price: $${menuItems[i].price}`;
+  menuPrices[i].classList = "price-text";
+  menuCards[i].appendChild(menuPrices[i]);
+
+  //this creates the buttons
+  menuButtons[i] = document.createElement("button");
+  menuButtons[i].innerHTML = "Add to Cart";
+  menuButtons[i].classList = "btn btn-success add-to-cart button-colour";
+  menuButtons[i].setAttribute("onclick", `addItemToCart(menuItems[${i}])`);
+  //disable the button if the item is already in cart.
+  if (cartItems.includes(menuItems[i])) {
+    menuButtons[i].disabled = true;
+  }
+  menuCards[i].appendChild(menuButtons[i]);
 }
 
 //adds an item to the cart.
@@ -175,7 +147,7 @@ function addItemToCart(item) {
 
     //adds the remove item button
     cartItemsRemoveButtons.push(document.createElement("button"));
-    cartItemsRemoveButtons[cartItemsRemoveButtons.length - 1].classList ="btn btn-warning remove-item";
+    cartItemsRemoveButtons[cartItemsRemoveButtons.length - 1].classList = "btn btn-warning remove-item";
     cartItemsRemoveButtons[cartItemsRemoveButtons.length - 1].innerHTML = "-";
     cartItemsRemoveButtons[cartItemsRemoveButtons.length - 1].setAttribute("onclick", `removeItem(${cartItemsRemoveButtons.length - 1})`);
     cartItemsToShow[cartItemsToShow.length - 1].appendChild(cartItemsRemoveButtons[cartItemsRemoveButtons.length - 1]);
@@ -216,7 +188,7 @@ function goToCart() {
     document.getElementById("content").style = "transform: translateX(-100%)";
     screen = 1;
     //after 500ms, remove the screen that is not being looked at.
-    setTimeout(function(){
+    setTimeout(function () {
       showMenu();
     }, 500);
   } else {
@@ -257,11 +229,11 @@ function removeItem(index, bypass) {
   else {
     if (bypass === 1 || confirm("Are you sure you want to remove this item from the cart?")) {
       //if it is a lunch item, remove that item from the lunch total, else remove it from the morning tea items.
-			if (lunchWeek1.includes(cartItems[index]) || lunchWeek2.includes(cartItems[index])) {
-				lunchItems--;
-			} else {
-				morningTeaItems--;
-			}
+      if (lunchWeek1.includes(cartItems[index]) || lunchWeek2.includes(cartItems[index])) {
+        lunchItems--;
+      } else {
+        morningTeaItems--;
+      }
 
       //update the total price
       totalPrice -= cartItems[index].price;
@@ -313,7 +285,7 @@ function addItem(index) {
 
 //changes the menu to lunch or morning tea
 function changeMenu(timeSelected) {
-	//this function changes the menu from morning tea to lunch and vice versa
+  //this function changes the menu from morning tea to lunch and vice versa
   document.getElementById(time).disabled = false;
   time = timeSelected;
   showMenu();
@@ -322,9 +294,9 @@ function changeMenu(timeSelected) {
 
 //updates the lunches menu
 function updateLunches(wk, dy) {
-	week = wk;
-	day = dy;
-	showMenu();
+  week = wk;
+  day = dy;
+  showMenu();
 }
 
 //opens and changes the dropdown menu for changing the day.
@@ -352,7 +324,7 @@ function completeOrder() {
   if (document.getElementById('inputName').value === "" || document.getElementById('inputStudentID').value === "" || document.getElementById('inputTutorGroup').value === "") {
     alert("fill out the fields!");
   } else {
-    if (document.getElementById("completeItems").innerHTML === "") { 
+    if (document.getElementById("completeItems").innerHTML === "") {
       //when the order complete screen is opened
       //hide the credentials screen
       document.getElementById("credentials").style = "display: none";
@@ -361,13 +333,13 @@ function completeOrder() {
       //disable the cart button
       document.getElementById("cartCard").disabled = true;
       //add all of the cart items to the order complete screen
-			for (let i = 0; i < cartItems.length; i++) {
-				orderCompleteElements[i] = document.createElement('p');
-				orderCompleteElements[i].classList = "confirm-item list-group-item mgt5";
-				orderCompleteElements[i].style = "border-top-width: 2px";
-				orderCompleteElements[i].innerHTML = `x${cartAmounts[i].innerHTML} ${cartItems[i].name}`;
-				document.getElementById("completeItems").appendChild(orderCompleteElements[i]);
-			}
+      for (let i = 0; i < cartItems.length; i++) {
+        orderCompleteElements[i] = document.createElement('p');
+        orderCompleteElements[i].classList = "confirm-item list-group-item mgt5";
+        orderCompleteElements[i].style = "border-top-width: 2px";
+        orderCompleteElements[i].innerHTML = `x${cartAmounts[i].innerHTML} ${cartItems[i].name}`;
+        document.getElementById("completeItems").appendChild(orderCompleteElements[i]);
+      }
     } else {
       //when the order completed screen is closed
       //hide the order completed screen
@@ -380,14 +352,14 @@ function completeOrder() {
       //re-enable the cart buitton
       document.getElementById("cartCard").disabled = false;
       //remove all of the items from the cart.
-			let num = cartItems.length;
-			for(let i = 0; i < num; i++) {
-				while (cartAmounts[0] && cartAmounts[0].innerHTML >= 1) {
-					removeItem(0, 1);
-				}
+      let num = cartItems.length;
+      for (let i = 0; i < num; i++) {
+        while (cartAmounts[0] && cartAmounts[0].innerHTML >= 1) {
+          removeItem(0, 1);
+        }
       }
       //update the menu so that the buttons are all enabled.
       showMenu();
-		}
+    }
   }
 }
