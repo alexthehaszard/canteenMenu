@@ -173,7 +173,7 @@ function addItemToCart(item) {
     cartItemsToShow[cartItemsToShow.length - 1].appendChild(cartAmounts[cartAmounts.length - 1]);
 
     //make the total price update
-    document.getElementById("totalPrice").innerHTML = `Total: $${totalPrice}`;
+    document.getElementById("totalPrice").innerHTML = `Total: $${totalPrice.toFixed(2)}`;
   } else {
     //make sure there is not too many items going in the cart.
     if (time === "morning") {
