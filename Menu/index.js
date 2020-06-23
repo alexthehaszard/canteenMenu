@@ -309,6 +309,8 @@ function updateLunches(wk, dy) {
 function toggleDropdown(id, newid) {
   if (newid === "dropdownWeeks" && dropdownOpen === true) {
     document.getElementById("dropdownItems").style = "display: none";
+    document.getElementById("dropdownWeeks").style = "display: initial";
+    document.getElementById("dropdownDays").style = "display: none";
     dropdownOpen = false;
   }
   else if (newid === null) {
