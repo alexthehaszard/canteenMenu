@@ -158,9 +158,14 @@ body {
   transition: transform 0.5s ease;
 }
 
+#menu {
+	padding-right: 7%;
+	padding-left: 7%;
+}
+
 #menuItems {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(276px, 1fr));
 }
 
 #navBar {

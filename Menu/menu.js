@@ -1,4 +1,4 @@
-let menu = {
+const menu = {
   menuName: "Bayfield Canteen Menu",
   content: {
     morningTea: {

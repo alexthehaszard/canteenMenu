@@ -6,6 +6,7 @@ let morningTeaItems = 0;
 let lunchItems = 0;
 
 //arrays for the items in the lunch menu
+let morningTeaMenu = Object.values(menu.content.morningTea);
 let lunchWeek1 = Object.values(menu.content.lunch.week1);
 let lunchWeek2 = Object.values(menu.content.lunch.week2);
 
@@ -46,9 +47,11 @@ let time = "morning"; // time is morning
 // show the week 1, monday, morning menu
 showMenu();
 
-//the max amount of a certain
-let maxMorningTea = 3;
-let maxLunch = 1;
+//the max amount of a certain item or type of item
+const MAX_MORNING_TEA = 3;
+const MAX_MORNING_TEA_PER_ITEM = 3;
+const MAX_LUNCH = 1;
+const MAX_LUNCH_PER_ITEM = 1;
 
 //this displays all of the menu elements including their cards, titles, prices and buttons.
 function showMenu() {
@@ -75,7 +78,7 @@ function showMenu() {
 
     //create the title for the lunch menu
     document.getElementById("header").innerHTML = "";
-    createMenuCard(0, "lunch-cards");
+    createMenuCard(day, "lunch-cards");
   }
 }
 
@@ -112,7 +115,7 @@ function createMenuCard(i, itemClass) {
 //adds an item to the cart.
 function addItemToCart(item) {
   //if there is less than 3 morning tea items or less than 1 lunch items
-  if ((morningTeaItems < maxMorningTea && time === "morning") || (lunchItems < maxLunch && time === "lunch")) {
+  if ((morningTeaItems < MAX_MORNING_TEA && time === "morning") || (lunchItems < MAX_LUNCH && time === "lunch")) {
     //keep track of how many lunch/morning tea items you have and disable the button
     if (time === "morning") {
       morningTeaItems++;
@@ -159,7 +162,7 @@ function addItemToCart(item) {
     cartItemsAddButtons[cartItemsAddButtons.length - 1].setAttribute("onclick", `addItem(${cartItemsAddButtons.length - 1})`);
     cartItemsToShow[cartItemsToShow.length - 1].appendChild(cartItemsAddButtons[cartItemsAddButtons.length - 1]);
 
-    if (lunchWeek1.includes(item) || lunchWeek2.includes(item)) {
+    if (((lunchWeek1.includes(item) || lunchWeek2.includes(item)) && MAX_LUNCH_PER_ITEM === 1) || morningTeaMenu.includes(item) && MAX_MORNING_TEA_PER_ITEM === 1) {
       cartItemsAddButtons[cartItemsAddButtons.length - 1].disabled = true;
     }
 
@@ -271,7 +274,10 @@ function removeItem(index, bypass) {
 //adds an item to the cart
 function addItem(index) {
   //if there is 3, then disable the button
-  if (cartAmounts[index].innerHTML === '2') {
+  if (parseInt(cartAmounts[index].innerHTML) === MAX_MORNING_TEA_PER_ITEM-1 && morningTeaMenu.includes(cartItems[index])) {
+    cartItemsAddButtons[index].disabled = true;
+  }
+  else if (parseInt(cartAmounts[index].innerHTML) === MAX_LUNCH_PER_ITEM-1 && (lunchWeek1.includes(cartItems[index]) || lunchWeek2.includes(cartItems[index]))) {
     cartItemsAddButtons[index].disabled = true;
   }
 
