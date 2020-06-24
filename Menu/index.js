@@ -115,7 +115,10 @@ function createMenuCard(i, itemClass) {
 //adds an item to the cart.
 function addItemToCart(item) {
   //if there is less than 3 morning tea items or less than 1 lunch items
-  if ((morningTeaItems < MAX_MORNING_TEA && time === "morning") || (lunchItems < MAX_LUNCH && time === "lunch")) {
+  if (
+    (morningTeaItems < MAX_MORNING_TEA && time === "morning") ||
+    (lunchItems < MAX_LUNCH && time === "lunch")
+  ) {
     //keep track of how many lunch/morning tea items you have and disable the button
     if (time === "morning") {
       morningTeaItems++;
@@ -137,32 +140,55 @@ function addItemToCart(item) {
 
     //add a list element, give it classes, put it inside the ul element and display the items name
     cartItemsToShow.push(document.createElement("li"));
-    cartItemsToShow[cartItemsToShow.length - 1].classList = "list-group-item checkout-item";
-    cartItemsToShow[cartItemsToShow.length - 1].innerHTML = cartItems[cartItems.length - 1].name;
-    document.getElementById("checkoutList").appendChild(cartItemsToShow[cartItemsToShow.length - 1]);
+    cartItemsToShow[cartItemsToShow.length - 1].classList =
+      "list-group-item checkout-item";
+    cartItemsToShow[cartItemsToShow.length - 1].innerHTML =
+      cartItems[cartItems.length - 1].name;
+    document
+      .getElementById("checkoutList")
+      .appendChild(cartItemsToShow[cartItemsToShow.length - 1]);
 
     //add a p element, give it classes, put it inside of li element and display the price.
     cartPricesToShow.push(document.createElement("p"));
     cartPricesToShow[cartPricesToShow.length - 1].classList = "list-price";
-    cartPricesToShow[cartPricesToShow.length - 1].innerHTML = "$" + cartItems[cartItems.length - 1].price;
-    cartItemsToShow[cartItemsToShow.length - 1].appendChild(cartPricesToShow[cartPricesToShow.length - 1]);
+    cartPricesToShow[cartPricesToShow.length - 1].innerHTML =
+      "$" + cartItems[cartItems.length - 1].price;
+    cartItemsToShow[cartItemsToShow.length - 1].appendChild(
+      cartPricesToShow[cartPricesToShow.length - 1]
+    );
     totalPrice += parseFloat(cartItems[cartItems.length - 1].price);
 
     //adds the remove item button
     cartItemsRemoveButtons.push(document.createElement("button"));
-    cartItemsRemoveButtons[cartItemsRemoveButtons.length - 1].classList = "btn btn-warning remove-item";
+    cartItemsRemoveButtons[cartItemsRemoveButtons.length - 1].classList =
+      "btn btn-warning remove-item";
     cartItemsRemoveButtons[cartItemsRemoveButtons.length - 1].innerHTML = "-";
-    cartItemsRemoveButtons[cartItemsRemoveButtons.length - 1].setAttribute("onclick", `removeItem(${cartItemsRemoveButtons.length - 1})`);
-    cartItemsToShow[cartItemsToShow.length - 1].appendChild(cartItemsRemoveButtons[cartItemsRemoveButtons.length - 1]);
+    cartItemsRemoveButtons[cartItemsRemoveButtons.length - 1].setAttribute(
+      "onclick",
+      `removeItem(${cartItemsRemoveButtons.length - 1})`
+    );
+    cartItemsToShow[cartItemsToShow.length - 1].appendChild(
+      cartItemsRemoveButtons[cartItemsRemoveButtons.length - 1]
+    );
 
     //add the add item button
     cartItemsAddButtons.push(document.createElement("button"));
-    cartItemsAddButtons[cartItemsAddButtons.length - 1].classList = "btn btn-warning add-item";
+    cartItemsAddButtons[cartItemsAddButtons.length - 1].classList =
+      "btn btn-warning add-item";
     cartItemsAddButtons[cartItemsAddButtons.length - 1].innerHTML = "+";
-    cartItemsAddButtons[cartItemsAddButtons.length - 1].setAttribute("onclick", `addItem(${cartItemsAddButtons.length - 1})`);
-    cartItemsToShow[cartItemsToShow.length - 1].appendChild(cartItemsAddButtons[cartItemsAddButtons.length - 1]);
+    cartItemsAddButtons[cartItemsAddButtons.length - 1].setAttribute(
+      "onclick",
+      `addItem(${cartItemsAddButtons.length - 1})`
+    );
+    cartItemsToShow[cartItemsToShow.length - 1].appendChild(
+      cartItemsAddButtons[cartItemsAddButtons.length - 1]
+    );
 
-    if (((lunchWeek1.includes(item) || lunchWeek2.includes(item)) && MAX_LUNCH_PER_ITEM === 1) || morningTeaMenu.includes(item) && MAX_MORNING_TEA_PER_ITEM === 1) {
+    if (
+      ((lunchWeek1.includes(item) || lunchWeek2.includes(item)) &&
+        MAX_LUNCH_PER_ITEM === 1) ||
+      (morningTeaMenu.includes(item) && MAX_MORNING_TEA_PER_ITEM === 1)
+    ) {
       cartItemsAddButtons[cartItemsAddButtons.length - 1].disabled = true;
     }
 
@@ -170,10 +196,14 @@ function addItemToCart(item) {
     cartAmounts.push(document.createElement("p"));
     cartAmounts[cartAmounts.length - 1].innerHTML = 1;
     cartAmounts[cartAmounts.length - 1].classList = "item-count";
-    cartItemsToShow[cartItemsToShow.length - 1].appendChild(cartAmounts[cartAmounts.length - 1]);
+    cartItemsToShow[cartItemsToShow.length - 1].appendChild(
+      cartAmounts[cartAmounts.length - 1]
+    );
 
     //make the total price update
-    document.getElementById("totalPrice").innerHTML = `Total: $${totalPrice.toFixed(2)}`;
+    document.getElementById(
+      "totalPrice"
+    ).innerHTML = `Total: $${totalPrice.toFixed(2)}`;
   } else {
     //make sure there is not too many items going in the cart.
     if (time === "morning") {
@@ -230,9 +260,15 @@ function removeItem(index, bypass) {
   }
   //if there is only one, then remove the card.
   else {
-    if (bypass === 1 || confirm("Are you sure you want to remove this item from the cart?")) {
+    if (
+      bypass === 1 ||
+      confirm("Are you sure you want to remove this item from the cart?")
+    ) {
       //if it is a lunch item, remove that item from the lunch total, else remove it from the morning tea items.
-      if (lunchWeek1.includes(cartItems[index]) || lunchWeek2.includes(cartItems[index])) {
+      if (
+        lunchWeek1.includes(cartItems[index]) ||
+        lunchWeek2.includes(cartItems[index])
+      ) {
         lunchItems--;
       } else {
         morningTeaItems--;
@@ -274,10 +310,16 @@ function removeItem(index, bypass) {
 //adds an item to the cart
 function addItem(index) {
   //if there is 3, then disable the button
-  if (parseInt(cartAmounts[index].innerHTML) === MAX_MORNING_TEA_PER_ITEM-1 && morningTeaMenu.includes(cartItems[index])) {
+  if (
+    parseInt(cartAmounts[index].innerHTML) === MAX_MORNING_TEA_PER_ITEM - 1 &&
+    morningTeaMenu.includes(cartItems[index])
+  ) {
     cartItemsAddButtons[index].disabled = true;
-  }
-  else if (parseInt(cartAmounts[index].innerHTML) === MAX_LUNCH_PER_ITEM-1 && (lunchWeek1.includes(cartItems[index]) || lunchWeek2.includes(cartItems[index]))) {
+  } else if (
+    parseInt(cartAmounts[index].innerHTML) === MAX_LUNCH_PER_ITEM - 1 &&
+    (lunchWeek1.includes(cartItems[index]) ||
+      lunchWeek2.includes(cartItems[index]))
+  ) {
     cartItemsAddButtons[index].disabled = true;
   }
 
@@ -312,8 +354,7 @@ function toggleDropdown(id, newid) {
     document.getElementById("dropdownWeeks").style = "display: initial";
     document.getElementById("dropdownDays").style = "display: none";
     dropdownOpen = false;
-  }
-  else if (newid === null) {
+  } else if (newid === null) {
     document.getElementById(id).style = "display: none";
     document.getElementById("dropdownItems").style = "display: none";
     dropdownOpen = false;
@@ -327,9 +368,21 @@ function toggleDropdown(id, newid) {
   }
 }
 
+//close the dropdown menu
+function removeDropdown() {
+  document.getElementById("dropdownItems").style = "display: none";
+  document.getElementById("dropdownWeeks").style = "display: initial";
+  document.getElementById("dropdownDays").style = "display: none";
+  dropdownOpen = false;
+}
+
 //opens the completed order screen.
 function completeOrder() {
-  if (document.getElementById('inputName').value === "" || document.getElementById('inputStudentID').value === "" || document.getElementById('inputTutorGroup').value === "") {
+  if (
+    document.getElementById("inputName").value === "" ||
+    document.getElementById("inputStudentID").value === "" ||
+    document.getElementById("inputTutorGroup").value === ""
+  ) {
     alert("fill out the fields!");
   } else {
     if (document.getElementById("completeItems").innerHTML === "") {
@@ -342,11 +395,16 @@ function completeOrder() {
       document.getElementById("cartCard").disabled = true;
       //add all of the cart items to the order complete screen
       for (let i = 0; i < cartItems.length; i++) {
-        orderCompleteElements[i] = document.createElement('p');
-        orderCompleteElements[i].classList = "confirm-item list-group-item mgt5";
+        orderCompleteElements[i] = document.createElement("p");
+        orderCompleteElements[i].classList =
+          "confirm-item list-group-item mgt5";
         orderCompleteElements[i].style = "border-top-width: 2px";
-        orderCompleteElements[i].innerHTML = `x${cartAmounts[i].innerHTML} ${cartItems[i].name}`;
-        document.getElementById("completeItems").appendChild(orderCompleteElements[i]);
+        orderCompleteElements[
+          i
+        ].innerHTML = `x${cartAmounts[i].innerHTML} ${cartItems[i].name}`;
+        document
+          .getElementById("completeItems")
+          .appendChild(orderCompleteElements[i]);
       }
     } else {
       //when the order completed screen is closed
