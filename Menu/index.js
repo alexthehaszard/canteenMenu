@@ -412,6 +412,7 @@ function completeOrder() {
       document.getElementById("orderComplete").style = "display: none";
       //go to the main menu
       screen = 1;
+      changeMenu("morning");
       goToCart();
       //remove the items from inside the order complete screen
       document.getElementById("completeItems").innerHTML = "";

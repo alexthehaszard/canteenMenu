@@ -156,6 +156,7 @@
               id="inputTutorGroup"
               class="inputs mgt5"
               type="text"
+              oninput="this.value = this.value.replace(/[^a-zA-Z]/, '')"
               maxlength="3"
             />
             <!-- found a fix for maxlength using number on https://stackoverflow.com/questions/18510845/maxlength-ignored-for-input-type-number-in-chrome -->
@@ -163,8 +164,9 @@
               placeholder="Student ID"
               id="inputStudentID"
               class="inputs mgt5"
-              type="number"
-              onkeydown="if (this.value.length == 5 && event.keyCode != 8) return false;"
+              type="text"
+              maxlength="5"
+              oninput="this.value = this.value.replace(/[^0-9]/, '')"
             />
             <button
               id="buyButton"
