@@ -256,7 +256,7 @@ function removeItem(index, bypass) {
 
     //update the total price
     totalPrice -= cartItems[index].price;
-    document.getElementById("totalPrice").innerHTML = `Total: $${totalPrice}`;
+    document.getElementById("totalPrice").innerHTML = `Total: $${totalPrice.toFixed(2)}`;
   }
   //if there is only one, then remove the card.
   else {
@@ -276,7 +276,7 @@ function removeItem(index, bypass) {
 
       //update the total price
       totalPrice -= cartItems[index].price;
-      document.getElementById("totalPrice").innerHTML = `Total: $${totalPrice}`;
+      document.getElementById("totalPrice").innerHTML = `Total: $${totalPrice.toFixed(2)}`;
 
       //remove the card of the item being removed
       cartItemsToShow[index].parentNode.removeChild(cartItemsToShow[index]);
@@ -328,7 +328,7 @@ function addItem(index) {
 
   //update the total price
   totalPrice += parseInt(cartItems[index].price);
-  document.getElementById("totalPrice").innerHTML = `Total: $${totalPrice}`;
+  document.getElementById("totalPrice").innerHTML = `Total: $${totalPrice.toFixed(2)}`;
 }
 
 //changes the menu to lunch or morning tea
