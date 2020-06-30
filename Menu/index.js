@@ -78,6 +78,10 @@ function showMenu() {
 
     //create the title for the lunch menu
     document.getElementById("header").innerHTML = "";
+    menuTitle = document.createElement("p");
+    menuTitle.style = "position: relative; margin-top: 10px; text-align: center; font-weight: bold; margin-bottom: 0";
+    menuTitle.innerHTML = `${menuItems[day].day} Week ${week}`
+    document.getElementById("header").appendChild(menuTitle);
     createMenuCard(day, "lunch-cards");
   }
 }
