@@ -80,7 +80,7 @@ function showMenu() {
     document.getElementById("header").innerHTML = "";
     menuTitle = document.createElement("p");
     menuTitle.style = "position: relative; margin-top: 10px; text-align: center; font-weight: bold; margin-bottom: 0";
-    menuTitle.innerHTML = `${menuItems[day].day} Week ${week}`
+    menuTitle.innerHTML = `${menuItems[day].day} Week ${week}`;
     document.getElementById("header").appendChild(menuTitle);
     createMenuCard(day, "lunch-cards");
   }
@@ -318,12 +318,14 @@ function addItem(index) {
     parseInt(cartAmounts[index].innerHTML) === MAX_MORNING_TEA_PER_ITEM - 1 &&
     morningTeaMenu.includes(cartItems[index])
   ) {
+    // if the morning tea menu includes the item and it has reached the morning tea max,  disable the button.
     cartItemsAddButtons[index].disabled = true;
   } else if (
     parseInt(cartAmounts[index].innerHTML) === MAX_LUNCH_PER_ITEM - 1 &&
     (lunchWeek1.includes(cartItems[index]) ||
       lunchWeek2.includes(cartItems[index]))
   ) {
+    // if the lunch menu includes the item and it has reached the lunch max,  disable the button.
     cartItemsAddButtons[index].disabled = true;
   }
 
