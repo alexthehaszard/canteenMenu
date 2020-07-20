@@ -123,6 +123,10 @@ function addItemToCart(item) {
     (morningTeaItems < MAX_MORNING_TEA && time === "morning") ||
     (lunchItems < MAX_LUNCH && time === "lunch")
   ) {
+    if (cartItems.includes(item)) {
+      alert("This item is already in the cart.");
+      return;
+    }
     //keep track of how many lunch/morning tea items you have
     if (time === "morning") {
       morningTeaItems++;
