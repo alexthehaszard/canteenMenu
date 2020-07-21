@@ -23,6 +23,7 @@ let menuCards = [];
 let menuNames = [];
 let menuPrices = [];
 let menuButtons = [];
+let menuRemove = [];
 let menuTitle;
 
 //order complete list of elements.
@@ -109,11 +110,26 @@ function createMenuCard(i, itemClass) {
   menuButtons[i].innerHTML = "Add to Cart";
   menuButtons[i].classList = "btn btn-success add-to-cart button-colour";
   menuButtons[i].setAttribute("onclick", `addItemToCart(menuItems[${i}])`);
+	
+  //this creates the remove buttons
+  menuRemove[i] = document.createElement("button");
+  menuRemove[i].innerHTML = "Remove";
+  menuRemove[i].classList = "btn btn-danger add-to-cart";
+  menuRemove[i].style = "display: none";
+  menuRemove[i].setAttribute("onclick", `removeItemFromCart(menuItems[${i}])`);
+	
   //disable the button if the item is already in cart.
   if (cartItems.includes(menuItems[i])) {
     menuButtons[i].disabled = true;
+    menuRemove[i].style = "";
   }
-  menuCards[i].appendChild(menuButtons[i]);
+	
+	let buttonsDiv = document.createElement("div");
+	buttonsDiv.classList = "menu-buttons-container";
+	menuCards[i].appendChild(buttonsDiv);
+	
+  buttonsDiv.appendChild(menuButtons[i]);
+  buttonsDiv.appendChild(menuRemove[i]);
 }
 
 //adds an item to the cart.
@@ -135,6 +151,7 @@ function addItemToCart(item) {
     }
     //disable the button for the menu item added to cart
     menuButtons[menuItems.indexOf(item)].disabled = true;
+    menuRemove[menuItems.indexOf(item)].style = "";
 
     //show the card for the cart
     document.getElementById("checkoutItems").style = "display: flex";
@@ -198,6 +215,7 @@ function addItemToCart(item) {
       (morningTeaMenu.includes(item) && MAX_MORNING_TEA_PER_ITEM === 1)
     ) {
       cartItemsAddButtons[cartItemsAddButtons.length - 1].disabled = true;
+
     }
 
     //add the total text
@@ -438,5 +456,17 @@ function completeOrder() {
       //update the menu so that the buttons are all enabled.
       showMenu();
     }
+  }
+}
+
+function removeItemFromCart(item) {
+  if (confirm("Are you sure you want to remove this item from the cart?")) {
+    let index = cartItems.indexOf(item);
+    let num = cartAmounts[index].innerHTML;
+    for (let i = 0; i < num; i++) {
+      removeItem(index, 1);
+    }
+    menuButtons[menuItems.indexOf(item)].disabled = false;
+    menuRemove[menuItems.indexOf(item)].style = "display: none";
   }
 }
