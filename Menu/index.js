@@ -408,10 +408,10 @@ function removeDropdown() {
 function completeOrder() {
   if (
     document.getElementById("inputName").value === "" ||
-    document.getElementById("inputStudentID").value === "" ||
-    document.getElementById("inputTutorGroup").value === ""
+    document.getElementById("inputStudentID").value.length < 5 ||
+    document.getElementById("inputTutorGroup").value.length < 3
   ) {
-    alert("fill out the fields!");
+    alert("Please put your Name, Tutor Group and Student ID into the fields.");
   } else {
     if (document.getElementById("completeItems").innerHTML === "") {
       //when the order complete screen is opened
