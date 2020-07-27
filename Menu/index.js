@@ -270,7 +270,7 @@ function toggleCredentialScreen() {
   }
 }
 
-//removes an item from the cart
+//removes an item from a cart item's counter
 function removeItem(index, bypass) {
   //remove one from the item's total, if there is more than one
   if (cartAmounts[index].innerHTML > 1) {
@@ -459,6 +459,7 @@ function completeOrder() {
   }
 }
 
+// removes an item from the cart
 function removeItemFromCart(item) {
   if (confirm("Are you sure you want to remove this item from the cart?")) {
     let index = cartItems.indexOf(item);
