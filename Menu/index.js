@@ -1,3 +1,9 @@
+//the max amount of a certain item or type of item
+const MAX_MORNING_TEA = 3;
+const MAX_MORNING_TEA_PER_ITEM = 3;
+const MAX_LUNCH = 1;
+const MAX_LUNCH_PER_ITEM = 1;
+
 //what screen is being showed, the menu or the checkout.
 let screen = 0;
 
@@ -47,12 +53,6 @@ let day = 0; // monday
 let time = "morning"; // time is morning
 // show the week 1, monday, morning menu
 showMenu();
-
-//the max amount of a certain item or type of item
-const MAX_MORNING_TEA = 3;
-const MAX_MORNING_TEA_PER_ITEM = 3;
-const MAX_LUNCH = 1;
-const MAX_LUNCH_PER_ITEM = 1;
 
 //this displays all of the menu elements including their cards, titles, prices and buttons.
 function showMenu() {
