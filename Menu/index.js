@@ -412,6 +412,8 @@ function completeOrder() {
     document.getElementById("inputTutorGroup").value.length < 3
   ) {
     alert("Please put your Name, Tutor Group and Student ID into the fields.");
+  } else if (!tutors.includes(document.getElementById("inputTutorGroup").value.toString().toLowerCase())) {
+    alert("Tutor Group is not valid.");
   } else {
     if (document.getElementById("completeItems").innerHTML === "") {
       //when the order complete screen is opened
