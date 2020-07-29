@@ -455,6 +455,11 @@ function completeOrder() {
           removeItem(0, 1);
         }
       }
+      // remove input from input boxes for next order
+      document.getElementById("inputName").value = "";
+      document.getElementById("inputTutorGroup").value = "";
+      document.getElementById("inputStudentID").value = "";
+
       //update the menu so that the buttons are all enabled.
       showMenu();
     }
