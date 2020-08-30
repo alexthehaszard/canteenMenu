@@ -416,7 +416,22 @@ function completeOrder() {
     alert("Tutor Group is not valid.");
   } else {
     if (document.getElementById("completeItems").innerHTML === "") {
+      //move any lunch items to the end
+      if (lunchItems) {
+        for (let i = 0; i < cartItems.length; i++) {
+          if (lunchWeek1.includes(cartItems[i]) || lunchWeek2.includes(cartItems[i])) {
+            let temp = cartItems[i];
+            cartItems.splice(i, 1);
+            cartItems.push(temp);
+          }
+        }
+      }
       //when the order complete screen is opened
+      const totalElement = document.createElement("h1");
+      totalElement.innerHTML = `Total: $${totalPrice.toFixed(2)}`;
+      document.getElementById("completeItems").appendChild(totalElement);
+      //show thanks message
+      document.getElementById("cardHeader").innerHTML = `Thank you ${document.getElementById("inputName").value} from ${document.getElementById("inputTutorGroup").value}! <br> You ordered:`;
       //hide the credentials screen
       document.getElementById("credentials").style = "display: none";
       //show the order complete screen
@@ -424,14 +439,24 @@ function completeOrder() {
       //disable the cart button
       document.getElementById("cartCard").disabled = true;
       //add all of the cart items to the order complete screen
+      if (morningTeaItems) {
+        const morningTeaElement = document.createElement("h3");
+        morningTeaElement.innerHTML = "Morning Tea";
+        document.getElementById("completeItems").appendChild(morningTeaElement);
+      }
       for (let i = 0; i < cartItems.length; i++) {
+        if (lunchItems && i === cartItems.length - 1) {
+          const lunchElement = document.createElement("h3");
+          lunchElement.innerHTML = "Lunch";
+          document.getElementById("completeItems").appendChild(lunchElement);
+        }
         orderCompleteElements[i] = document.createElement("p");
         orderCompleteElements[i].classList =
           "confirm-item list-group-item mgt5";
         orderCompleteElements[i].style = "border-top-width: 2px";
         orderCompleteElements[
           i
-        ].innerHTML = `x${cartAmounts[i].innerHTML} ${cartItems[i].name}`;
+        ].innerHTML = `x${cartAmounts[i].innerHTML} ${cartItems[i].name} ${cartPricesToShow[i]  .innerHTML}`;
         document
           .getElementById("completeItems")
           .appendChild(orderCompleteElements[i]);
