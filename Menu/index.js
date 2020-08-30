@@ -429,6 +429,7 @@ function completeOrder() {
       //when the order complete screen is opened
       const totalElement = document.createElement("h1");
       totalElement.innerHTML = `Total: $${totalPrice.toFixed(2)}`;
+      totalElement.style = "border: 1px solid rgba(0,0,0,0.25); border-width: 0 0 1px 0; padding-bottom: 5px; margin-bottom: 5px;";
       document.getElementById("completeItems").appendChild(totalElement);
       //show thanks message
       document.getElementById("cardHeader").innerHTML = `Thank you ${document.getElementById("inputName").value} from ${document.getElementById("inputTutorGroup").value}! <br> You ordered:`;
@@ -441,13 +442,13 @@ function completeOrder() {
       //add all of the cart items to the order complete screen
       if (morningTeaItems) {
         const morningTeaElement = document.createElement("h3");
-        morningTeaElement.innerHTML = "Morning Tea";
+        morningTeaElement.innerHTML = "Morning Tea (10:50am)";
         document.getElementById("completeItems").appendChild(morningTeaElement);
       }
       for (let i = 0; i < cartItems.length; i++) {
         if (lunchItems && i === cartItems.length - 1) {
           const lunchElement = document.createElement("h3");
-          lunchElement.innerHTML = "Lunch";
+          lunchElement.innerHTML = "Lunch (1:00pm)";
           document.getElementById("completeItems").appendChild(lunchElement);
         }
         orderCompleteElements[i] = document.createElement("p");
