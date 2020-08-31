@@ -209,6 +209,10 @@ body {
   color: white;
 }
 
+#cardHeader {
+  padding: .75rem 3rem;
+}
+
 #menuNavigation {
 	left: 50%;
 	width: max-content;
