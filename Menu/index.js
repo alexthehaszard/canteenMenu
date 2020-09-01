@@ -504,3 +504,8 @@ function removeItemFromCart(item) {
     menuRemove[menuItems.indexOf(item)].style = "display: none";
   }
 }
+
+// cancels the order is order pressed button is pressed
+function cancelOrder() {
+  if (confirm('Are you sure you want to cancel the order?')) completeOrder('orderCompleteCard');
+}
